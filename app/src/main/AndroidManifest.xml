@@ -2,9 +2,19 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.sample.spotzpush" >
 
+    <!--Permissions required for Spotz Push-->
+    <permission
+        android:name="com.localz.spotzpush.sdk.permission.C2D_MESSAGE"
+        android:protectionLevel="signature" />
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.WAKE_LOCK" />
+    <uses-permission android:name="com.localz.spotzpush.sdk.permission.C2D_MESSAGE" />
+    <uses-permission android:name="com.google.android.c2dm.permission.RECEIVE" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+
     <application
         android:allowBackup="true"
-        android:icon="@mipmap/ic_launcher"
+        android:icon="@drawable/logo"
         android:label="@string/app_name"
         android:theme="@style/AppTheme" >
         <activity
@@ -16,6 +26,22 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
+
+        <!--Default service for Spotz Push. To add customisations to how notifications are handled,
+            create your own version which extends com.localz.spotzpush.sdk.service.SpotzPushIntentService -->
+        <service android:name="com.localz.spotzpush.sdk.service.DefaultIntentService" />
+
+        <!--Default receiver for Spotz Push, if com.localz.spotzpush.sdk.service.DefaultIntentService
+            is not used, then extend com.localz.spotzpush.sdk.receiver.GcmBroadcastReceiver
+            and ensure to include the full class name of the custom intent service-->
+        <receiver android:name="com.localz.spotzpush.sdk.receiver.DefaultBroadcastReceiver" android:permission="com.google.android.c2dm.permission.SEND">
+            <intent-filter>
+                <action android:name="com.google.android.c2dm.intent.RECEIVE" />
+            </intent-filter>
+        </receiver>
+
+
     </application>
 
 </manifest>

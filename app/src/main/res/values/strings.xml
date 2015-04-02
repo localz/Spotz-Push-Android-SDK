@@ -1,6 +1,5 @@
 <resources>
     <string name="app_name">Spotz Push</string>
 
-    <string name="hello_world">Hello world!</string>
-    <string name="action_settings">Settings</string>
+    <string name="main_text">Welcome to Spotz Push!\n This is the  deviceId for pushing notifications to:</string>
 </resources>

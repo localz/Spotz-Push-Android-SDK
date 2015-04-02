@@ -1,39 +1,69 @@
 package com.sample.spotzpush;
 
-import android.support.v7.app.ActionBarActivity;
+import android.app.Activity;
 import android.os.Bundle;
-import android.view.Menu;
-import android.view.MenuItem;
+import android.util.Log;
+import android.widget.TextView;
 
+import com.google.android.gms.common.ConnectionResult;
+import com.google.android.gms.common.GooglePlayServicesUtil;
+import com.localz.spotzpush.sdk.model.response.DeviceJsonResponse;
+import com.localz.spotzpush.sdk.service.SpotzPushService;
+import com.localz.spotzpush.sdk.task.DeviceRegisterOrUpdateTask;
 
-public class MainActivity extends ActionBarActivity {
+/**
+ * Sample activity which includes the initialisation methods required to start using Spotz Push
+ */
+public class MainActivity extends Activity {
+    public static final int PLAY_SERVICES_RESOLUTION_REQUEST = 9000;
+    private static final String TAG = MainActivity.class.getSimpleName();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        if (checkPlayServices()) {
+            //Initialise SpotzPushService with three keys: Google Project number for the app,
+            //Spotz Push project ID, and the Spotz Push Android client key. They can all be directly
+            //provided as a string.
+            SpotzPushService.init(
+                    this,
+                    BuildConfig.PLAY_PROJECT_ID,
+                    BuildConfig.SPOTZ_PUSH_PROJECT_ID,
+                    BuildConfig.SPOTZ_PUSH_PROJECT_KEY,
+                    //Optional callback to process tasks after registration is complete, can be null.
+                    new DeviceRegisterOrUpdateTask.OnCompleted() {
+                        @Override
+                        public void onCompleted(DeviceJsonResponse deviceJsonResponse) {
+                            ((TextView) MainActivity.this.findViewById(R.id.deviceId)).setText(deviceJsonResponse.deviceId);
+                        }
+                    }
+            );
+        }
+        else {
+            Log.i(TAG, "No valid Google Play Services APK found.");
+        }
     }
 
+    /**
+     * Helper method to ensure that Google Play services are available and updated on the device.
+     * This is a prerequisite to be able to use push notifications.
+     */
+    private boolean checkPlayServices() {
+        int result = GooglePlayServicesUtil.isGooglePlayServicesAvailable(this);
 
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_main, menu);
-        return true;
-    }
+        if (result != ConnectionResult.SUCCESS) {
+            if (GooglePlayServicesUtil.isUserRecoverableError(result)) {
+                GooglePlayServicesUtil.getErrorDialog(result, this, PLAY_SERVICES_RESOLUTION_REQUEST).show();
+            }
+            else {
+                Log.i(TAG, "This device is not supported.");
+            }
 
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
-
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            return true;
+            return false;
         }
 
-        return super.onOptionsItemSelected(item);
+        return true;
     }
 }
