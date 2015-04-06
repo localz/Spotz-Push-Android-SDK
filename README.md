@@ -27,7 +27,7 @@ The sample app requires devices running Android 4.0.3 or newer.
     
     If you're using **Android Studio**, simply 'Open' the project.
     
-  3. Create a Spotz Push project using the [Spotz Push console](http://spotzpush.localz.com).
+  3. Create a Spotz Push project.
 
   4. Log into the [Google Developer Console](https://console.developers.google.com/project) and ensure to have a project created. Note the 'Project Number' on the overview screen for the project, and ensure to enable 'Cloud Messaging for Android' on the APIs screen.
     
@@ -45,22 +45,24 @@ How to add the SDK to your own Project
 
 If you are using **Gradle**, include the following in the dependencies closure for the app.
 
-...
-allprojects {
-    repositories {
-        maven { url "http://localz.github.io/mvn-repo" }
+    ...
+
+    allprojects {
+        repositories {
+            maven { url "http://localz.github.io/mvn-repo" }
+        }
     }
-}
 
-dependencies {
-    compile 'com.google.android.gms:play-services-location:6.5.87'
-    compile 'com.google.android.gms:play-services-base:6.5.87'
+    dependencies {
+        compile 'com.google.android.gms:play-services-location:6.5.87'
+        compile 'com.google.android.gms:play-services-base:6.5.87'
 
-    compile 'com.google.code.gson:gson:2.3.1'
-    compile 'com.google.http-client:google-http-client:1.20.0'
-    compile 'com.google.http-client:google-http-client-gson:1.20.0'
-}
-...
+        compile 'com.google.code.gson:gson:2.3.1'
+        compile 'com.google.http-client:google-http-client:1.20.0'
+        compile 'com.google.http-client:google-http-client-gson:1.20.0'
+    }
+    
+    ...
 
 How to use the SDK
 ==================
@@ -70,9 +72,10 @@ There are two main ways to get started with the SDK.
 The quickest and easiest way is to utilise the defaults provided by the SDK with the following changes:
 
 ###AndroidManifest.xml
-Add the following within the <manifest> element.
+Add the following within the *manifest* element.
 
-...
+    ...
+    
     <permission
         android:name="com.localz.spotzpush.sdk.permission.C2D_MESSAGE"
         android:protectionLevel="signature" />
@@ -81,11 +84,13 @@ Add the following within the <manifest> element.
     <uses-permission android:name="com.localz.spotzpush.sdk.permission.C2D_MESSAGE" />
     <uses-permission android:name="com.google.android.c2dm.permission.RECEIVE" />
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
-...
+    
+    ...
 
-Add the following within the <applicatino> element
+Add the following within the *application* element
 
-...
+    ...
+    
     <receiver android:name="com.localz.spotzpush.sdk.receiver.DefaultBroadcastReceiver" android:permission="com.google.android.c2dm.permission.SEND">
         <intent-filter>
             <action android:name="com.google.android.c2dm.intent.RECEIVE" />
@@ -93,13 +98,16 @@ Add the following within the <applicatino> element
     </receiver>
 
     <service android:name="com.localz.spotzpush.sdk.service.DefaultIntentService" />
-...
+    
+    ...
 
 Within the app, include the following
 
-...
-    SpotzPushService.init(this, "your-google-project-number", "your-spotz-push-project-id", "your-spotz-push-client-key");
-...
+    ...
+    
+    SpotzPushService.init(android.content.Context, "your-google-project-number", "your-spotz-push-project-id", "your-spotz-push-client-key");
+
+    ...
 
 This call should be made periodically to ensure that any updates to the push token is captured. Also ensure to check whether the application has Google Play Services available before initialising the SpotzPushService. The sample code includes an example of this in MainActivity.checkPlayServices();
 
