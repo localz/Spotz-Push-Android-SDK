@@ -1,7 +1,7 @@
 <a href="http://www.localz.co/"><img alt="Localz logo" align="right" width="50" height="50" src="http://www.localz.co/assets/images/logo-round.png" /></a> Spotz Push Android SDK
 =================
 
-[Spotz Push](http://spotz.localz.co/) is a push notification platform.
+Spotz Push is a push notification platform.
 
 Changelog
 =========
@@ -60,6 +60,8 @@ If you are using **Gradle**, include the following in the dependencies closure f
         compile 'com.google.code.gson:gson:2.3.1'
         compile 'com.google.http-client:google-http-client:1.20.0'
         compile 'com.google.http-client:google-http-client-gson:1.20.0'
+        
+        compile 'com.localz.spotzpush.sdk:spotz-push-sdk:3@aar'
     }
     
     ...
