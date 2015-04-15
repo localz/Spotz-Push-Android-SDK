@@ -54,14 +54,15 @@ If you are using **Gradle**, include the following in the dependencies closure f
     }
 
     dependencies {
-        compile 'com.google.android.gms:play-services-location:6.5.87'
-        compile 'com.google.android.gms:play-services-base:6.5.87'
+        compile 'com.google.android.gms:play-services-base:7.0.0'
+        compile 'com.google.android.gms:play-services-gcm:7.0.0'
+        compile 'com.google.android.gms:play-services-location:7.0.0'
 
         compile 'com.google.code.gson:gson:2.3.1'
         compile 'com.google.http-client:google-http-client:1.20.0'
         compile 'com.google.http-client:google-http-client-gson:1.20.0'
         
-        compile 'com.localz.spotzpush.sdk:spotz-push-sdk:3@aar'
+        compile 'com.localz.spotzpush.sdk:spotz-push-sdk:4@aar'
     }
     
     ...
