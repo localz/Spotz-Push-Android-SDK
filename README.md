@@ -1,4 +1,4 @@
-<a href="http://www.localz.co/"><img alt="Localz logo" align="right" width="50" height="50" src="http://localz.com/wp-content/uploads/2015/02/localz_logo.png" /></a> Spotz Push Android SDK
+<a href="http://www.localz.co/"><img alt="Localz logo" align="right" src="http://localz.com/wp-content/uploads/2015/02/localz_logo.png" /></a> Spotz Push Android SDK
 =================
 
 Spotz Push is a push notification platform.
