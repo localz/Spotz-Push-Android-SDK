@@ -34,5 +34,5 @@ dependencies {
     compile 'com.google.http-client:google-http-client:1.20.0'
     compile 'com.google.http-client:google-http-client-gson:1.20.0'
 
-    compile 'com.localz.spotzpush.sdk:spotz-push-sdk:4@aar'
+    compile 'com.localz.spotzpush.sdk:spotz-push-sdk:12@aar'
 }
