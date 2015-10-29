@@ -9,6 +9,9 @@ Changelog
 **1.0.0**	
 * Initial public release.
 
+**1.0.1**
+* Incorporated changes required for version 1.0.1 of the Spotz Push SDK.
+
 What does the sample app do?
 ============================
 
@@ -62,7 +65,7 @@ If you are using **Gradle**, include the following in the dependencies closure f
         compile 'com.google.http-client:google-http-client:1.20.0'
         compile 'com.google.http-client:google-http-client-gson:1.20.0'
         
-        compile 'com.localz.spotzpush.sdk:spotz-push-sdk:12@aar'
+        compile 'com.localz.spotzpush.sdk:spotz-push-sdk:1.0.1@aar'
     }
     
     ...
@@ -75,20 +78,6 @@ There are two main ways to get started with the SDK.
 The quickest and easiest way is to utilise the defaults provided by the SDK with the following changes:
 
 ###AndroidManifest.xml
-Add the following within the *manifest* element.
-
-    ...
-    
-    <permission
-        android:name="com.localz.spotzpush.sdk.permission.C2D_MESSAGE"
-        android:protectionLevel="signature" />
-    <uses-permission android:name="android.permission.INTERNET" />
-    <uses-permission android:name="android.permission.WAKE_LOCK" />
-    <uses-permission android:name="com.localz.spotzpush.sdk.permission.C2D_MESSAGE" />
-    <uses-permission android:name="com.google.android.c2dm.permission.RECEIVE" />
-    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
-    
-    ...
 
 Add the following within the *application* element
 
