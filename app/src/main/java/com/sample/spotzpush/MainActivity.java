@@ -10,7 +10,7 @@ import com.google.android.gms.common.GooglePlayServicesUtil;
 import com.localz.spotzpush.sdk.model.response.BaseJsonResponse;
 import com.localz.spotzpush.sdk.model.response.DeviceJsonResponse;
 import com.localz.spotzpush.sdk.service.SpotzPushService;
-import com.localz.spotzpush.sdk.task.DeviceRegisterOrUpdateTask;
+import com.localz.spotzpush.sdk.task.BaseDeviceRegisterOrUpdateTask;
 
 /**
  * Sample activity which includes the initialisation methods required to start using Spotz Push
@@ -34,7 +34,7 @@ public class MainActivity extends Activity {
                     BuildConfig.SPOTZ_PUSH_PROJECT_ID,
                     BuildConfig.SPOTZ_PUSH_PROJECT_KEY,
                     //Optional callback to process tasks after registration is complete, can be null.
-                    new DeviceRegisterOrUpdateTask.Callback() {
+                    new BaseDeviceRegisterOrUpdateTask.Callback() {
                         @Override
                         public void onCompleted(DeviceJsonResponse deviceJsonResponse) {
                             ((TextView) MainActivity.this.findViewById(R.id.deviceId)).setText(deviceJsonResponse.deviceId);

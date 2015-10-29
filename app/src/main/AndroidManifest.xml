@@ -30,7 +30,7 @@
 
         <!--Default service for Spotz Push. To add customisations to how notifications are handled,
             create your own version which extends com.localz.spotzpush.sdk.service.SpotzPushIntentService -->
-        <service android:name="com.localz.spotzpush.sdk.service.DefaultIntentService" />
+        <service android:name="com.localz.spotzpush.sdk.service.GcmIntentService" />
 
         <!--Default receiver for Spotz Push, if com.localz.spotzpush.sdk.service.DefaultIntentService
             is not used, then extend com.localz.spotzpush.sdk.receiver.GcmBroadcastReceiver
