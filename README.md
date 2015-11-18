@@ -12,7 +12,7 @@ Changelog
 **1.0.1**
 * Incorporated changes required for version 1.0.1 of the Spotz Push SDK.
 
-**2.0.0
+**2.0.0**
 * Incorporated new SDK version to make compatible with Android 6.
 
 What does the sample app do?
