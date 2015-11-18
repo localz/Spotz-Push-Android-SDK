@@ -12,6 +12,9 @@ Changelog
 **1.0.1**
 * Incorporated changes required for version 1.0.1 of the Spotz Push SDK.
 
+**2.0.0
+* Incorporated new SDK version to make compatible with Android 6.
+
 What does the sample app do?
 ============================
 
@@ -57,9 +60,9 @@ If you are using **Gradle**, include the following in the dependencies closure f
     }
 
     dependencies {
-        compile 'com.google.android.gms:play-services-base:8.1.0'
-        compile 'com.google.android.gms:play-services-gcm:8.1.0'
-        compile 'com.google.android.gms:play-services-location:8.1.0'
+        compile 'com.google.android.gms:play-services-base:8.3.0'
+        compile 'com.google.android.gms:play-services-gcm:8.3.0'
+        compile 'com.google.android.gms:play-services-location:8.3.0'
 
         compile 'com.google.code.gson:gson:2.3.1'
         compile 'com.google.http-client:google-http-client:1.20.0'
@@ -82,15 +85,31 @@ The quickest and easiest way is to utilise the defaults provided by the SDK with
 Add the following within the *application* element
 
     ...
-    
-    <receiver android:name="com.localz.spotzpush.sdk.receiver.DefaultBroadcastReceiver" android:permission="com.google.android.c2dm.permission.SEND">
-        <intent-filter>
-            <action android:name="com.google.android.c2dm.intent.RECEIVE" />
-        </intent-filter>
-    </receiver>
+    <manifest>
+        <!--Permission to use only if default service for Spotz Push SDK is used.
+            To add customisations to how notifications are handled, create your own version which extends
+            com.localz.spotzpush.sdk.service.AbstractGcmIntentService -->
+        <permission
+            android:name="com.localz.spotzpush.sdk.permission.C2D_MESSAGE"
+            android:protectionLevel="signature" />
 
-    <service android:name="com.localz.spotzpush.sdk.service.DefaultIntentService" />
-    
+        <uses-permission android:name="com.localz.spotzpush.sdk.permission.C2D_MESSAGE" />
+
+        <application>
+            <!--Default service for Spotz Push. To add customisations to how notifications are handled,
+                create your own version which extends com.localz.spotzpush.sdk.service.AbstractGcmIntentService -->
+            <service android:name="com.localz.spotzpush.sdk.service.GcmIntentService" />
+
+            <!--Default receiver for Spotz Push, if com.localz.spotzpush.sdk.service.GcmBroadcastReceiver
+                is not used, then extend com.localz.spotzpush.sdk.receiver.AbstractGcmIntentService
+                and ensure to provide the full package and class name of the custom intent service to the AbstractGcmIntentService's constructor-->
+            <receiver android:name="com.localz.spotzpush.sdk.receiver.GcmBroadcastReceiver" android:permission="com.google.android.c2dm.permission.SEND">
+                <intent-filter>
+                    <action android:name="com.google.android.c2dm.intent.RECEIVE" />
+                </intent-filter>
+            </receiver>
+        </application>
+    </manifest>
     ...
 
 Within the app, include the following
