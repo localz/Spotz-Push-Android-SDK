@@ -8,8 +8,8 @@ android {
         applicationId "com.sample.spotzpush"
         minSdkVersion 15
         targetSdkVersion 23
-        versionCode 4
-        versionName "2.0.0"
+        versionCode 5
+        versionName "2.0.1"
 
         buildConfigField 'String', 'PLAY_PROJECT_ID', '"<Insert Google Project Number here>"'
         buildConfigField 'String', 'SPOTZ_PUSH_PROJECT_ID', '"Insert Spotz Push Project ID here"'
