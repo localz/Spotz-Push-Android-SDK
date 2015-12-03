@@ -15,6 +15,9 @@ Changelog
 **2.0.0**
 * Incorporated new SDK version to make compatible with Android 6.
 
+**2.0.1**
+* Bumped to latest SDK version and updated documentation.
+
 What does the sample app do?
 ============================
 
@@ -33,14 +36,16 @@ The sample app requires devices running Android 4.0.3 or newer.
     
     If you're using **Android Studio**, simply 'Open' the project.
     
-  3. Create a Spotz Push project.
+  3. Create a Spotz Push organisation and application via the [Spotz Push Console](https://spotz-push.localz.io/#/login).
 
   4. Log into the [Google Developer Console](https://console.developers.google.com/project) and ensure to have a project created. Note the 'Project Number' on the overview screen for the project, and ensure to enable 'Cloud Messaging for Android' on the APIs screen.
     
-  5. Insert your Spotz Push project ID and client key into MainActivity.java - these can be found in the Spotz console under your project and use the *Android* client key:
+  5. Insert your Spotz Push application ID and key into the app/build.gradle file - these can be found in the Spotz console under your application and use the Android client key:
 
         ...
-        SpotzPushService.init(this, "your-google-project-number", "your-spotz-push-project-id", "your-spotz-push-client-key");
+        buildConfigField 'String', 'PLAY_PROJECT_ID', '"123456789012"'
+        buildConfigField 'String', 'SPOTZ_PUSH_PROJECT_ID', '"11111111-aaaa-2222-bbbb-333333333333"'
+        buildConfigField 'String', 'SPOTZ_PUSH_PROJECT_KEY', '"11111111-aaaa-2222-bbbb-333333333333"'
         ...
 
   5. Run it!
@@ -68,7 +73,7 @@ If you are using **Gradle**, include the following in the dependencies closure f
         compile 'com.google.http-client:google-http-client:1.20.0'
         compile 'com.google.http-client:google-http-client-gson:1.20.0'
         
-        compile 'com.localz.spotzpush.sdk:spotz-push-sdk:1.0.1@aar'
+        compile 'com.localz.spotzpush.sdk:spotz-push-sdk:1.1.1@aar'
     }
     
     ...
