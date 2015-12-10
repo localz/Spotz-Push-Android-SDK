@@ -76,7 +76,7 @@ If you are using **Gradle**, include the following in the dependencies closure f
         compile 'com.google.http-client:google-http-client:1.20.0'
         compile 'com.google.http-client:google-http-client-gson:1.20.0'
         
-        compile 'com.localz.spotzpush.sdk:spotz-push-sdk-gcm:1.1.2@aar'
+        compile 'com.localz.spotzpush.sdk:spotz-push-sdk-gcm:1.1.3@aar'
     }
     
     ...
