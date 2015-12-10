@@ -8,8 +8,8 @@ android {
         applicationId "com.sample.spotzpush"
         minSdkVersion 15
         targetSdkVersion 23
-        versionCode 5
-        versionName "2.0.1"
+        versionCode 6
+        versionName "2.0.2"
 
         buildConfigField 'String', 'PLAY_PROJECT_ID', '"<Insert Google Project Number here>"'
         buildConfigField 'String', 'SPOTZ_PUSH_PROJECT_ID', '"Insert Spotz Push Project ID here"'
@@ -34,5 +34,5 @@ dependencies {
     compile 'com.google.http-client:google-http-client:1.20.0'
     compile 'com.google.http-client:google-http-client-gson:1.20.0'
 
-    compile 'com.localz.spotzpush.sdk:spotz-push-sdk-gcm:1.1.1@aar'
+    compile 'com.localz.spotzpush.sdk:spotz-push-sdk-gcm:1.1.2@aar'
 }

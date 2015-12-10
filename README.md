@@ -18,6 +18,9 @@ Changelog
 **2.0.1**
 * Bumped to latest SDK version and updated documentation.
 
+**2.0.2**
+* Bumped to latest SDK version and updated documentation.
+
 What does the sample app do?
 ============================
 
@@ -73,7 +76,7 @@ If you are using **Gradle**, include the following in the dependencies closure f
         compile 'com.google.http-client:google-http-client:1.20.0'
         compile 'com.google.http-client:google-http-client-gson:1.20.0'
         
-        compile 'com.localz.spotzpush.sdk:spotz-push-sdk:1.1.1@aar'
+        compile 'com.localz.spotzpush.sdk:spotz-push-sdk-gcm:1.1.2@aar'
     }
     
     ...
