@@ -21,6 +21,9 @@ Changelog
 **2.0.2**
 * Bumped to latest SDK version and updated documentation.
 
+**2.0.3**
+* Fixed issue with re-initialising SDK when the device is yet to be issued a deviceId.
+
 What does the sample app do?
 ============================
 
@@ -81,7 +84,7 @@ If you are using **Gradle**, include the following in the dependencies closure f
         }
 
         compile 'com.android.support:support-v4:23.1.1'
-        compile 'com.localz.spotzpush.sdk:spotz-push-sdk-gcm:1.1.3@aar'
+        compile 'com.localz.spotzpush.sdk:spotz-push-sdk-gcm:1.1.8@aar'
     }
     
     ...

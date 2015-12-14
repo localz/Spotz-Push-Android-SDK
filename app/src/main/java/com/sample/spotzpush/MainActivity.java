@@ -2,6 +2,7 @@ package com.sample.spotzpush;
 
 import android.Manifest;
 import android.app.Activity;
+import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.support.v4.app.ActivityCompat;
@@ -15,6 +16,7 @@ import com.localz.spotzpush.sdk.model.response.BaseJsonResponse;
 import com.localz.spotzpush.sdk.model.response.DeviceJsonResponse;
 import com.localz.spotzpush.sdk.service.SpotzPushService;
 import com.localz.spotzpush.sdk.task.BaseDeviceRegisterOrUpdateTask;
+import com.localz.spotzpush.sdk.util.Common;
 
 /**
  * Sample activity which includes the initialisation methods required to start using Spotz Push
@@ -75,6 +77,15 @@ public class MainActivity extends Activity {
         else {
             Log.i(TAG, "No valid Google Play Services APK found.");
         }
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+
+        SharedPreferences p = this.getSharedPreferences(Common.PUSH_PREFS, 0);
+        String deviceId = p.getString(Common.PUSH_PREFS_DEVICE_ID, "");
+        ((TextView) this.findViewById(R.id.deviceId)).setText(deviceId);
     }
 
     /**
