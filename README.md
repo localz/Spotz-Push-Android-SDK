@@ -117,7 +117,7 @@ Add the following within the *application* element
             <service android:name="com.localz.spotzpush.sdk.service.GcmIntentService" />
 
             <!--Default receiver for Spotz Push, if com.localz.spotzpush.sdk.service.GcmBroadcastReceiver
-                is not used, then extend com.localz.spotzpush.sdk.receiver.AbstractGcmIntentService
+                is not used, then extend com.localz.spotzpush.sdk.receiver.DefaultBroadcastReceiver
                 and ensure to provide the full package and class name of the custom intent service to the AbstractGcmIntentService's constructor-->
             <receiver android:name="com.localz.spotzpush.sdk.receiver.GcmBroadcastReceiver" android:permission="com.google.android.c2dm.permission.SEND">
                 <intent-filter>
@@ -164,13 +164,13 @@ If AbstractGcmIntentService is extended, this class will also need to be extende
 
 Modify the AndroidManifest.xml similar to:
 
-        <service android:name="com.example.CustomIntentService" />
+    <service android:name="com.example.CustomIntentService" />
 
-        <receiver android:name="com.example.CustomBroadcastReceiver" android:permission="com.google.android.c2dm.permission.SEND">
-            <intent-filter>
-                <action android:name="com.google.android.c2dm.intent.RECEIVE" />
-            </intent-filter>
-        </receiver>
+    <receiver android:name="com.example.CustomBroadcastReceiver" android:permission="com.google.android.c2dm.permission.SEND">
+        <intent-filter>
+            <action android:name="com.google.android.c2dm.intent.RECEIVE" />
+        </intent-filter>
+    </receiver>
 
 Contribution
 ============
