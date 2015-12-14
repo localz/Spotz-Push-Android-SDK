@@ -142,6 +142,36 @@ Your project is now ready to start using the Spotz Push SDK!
 
 When the SpotzPushService is initialised, the app will automatically grab a device token from Google Cloud Messaging, and register this with Spotz Push asynchronously in the background. Once this is done, a device ID will be issued to be used for pushing notifications to.
 
+Customise behaviour of SDK
+============
+###com.localz.spotzpush.sdk.service.AbstractGcmIntentService
+In order to customise how the notification appears on the device, this class will need to be extended, implementing the method:
+
+    public abstract void handleNotification(Bundle extras, String title, String message, String sound, String imageUrl)
+
+The `extras` parameter contains the push notification parsed into a bundle. The bundle contains the default (title, message, sound, imageUrl) and custom attributes of the notification. From this method, the `NotificationManager` can be freely called to display or manipulate the notification as desired.
+
+###com.localz.spotzpush.sdk.receiver.DefaultBroadcastReceiver
+If AbstractGcmIntentService is extended, this class will also need to be extended with the minimum of:
+
+    public class CustomBroadcastReceiver extends DefaultBroadcastReceiver {
+
+        public CustomBroadcastReceiver() {
+             //CustomIntentService extends AbstractGcmIntentService
+             super(CustomIntentService.class.getName());
+        }
+    }
+
+Modify the AndroidManifest.xml similar to:
+
+        <service android:name="com.example.CustomIntentService" />
+
+        <receiver android:name="com.example.CustomBroadcastReceiver" android:permission="com.google.android.c2dm.permission.SEND">
+            <intent-filter>
+                <action android:name="com.google.android.c2dm.intent.RECEIVE" />
+            </intent-filter>
+        </receiver>
+
 Contribution
 ============
 
