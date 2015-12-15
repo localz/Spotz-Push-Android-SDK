@@ -24,6 +24,9 @@ Changelog
 **2.0.3**
 * Fixed issue with re-initialising SDK when the device is yet to be issued a deviceId.
 
+**2.0.4**
+* IntentService to handle notification can now be configured via the AndroidManifest rather than extending DefaultBroadcastReceiver.
+
 What does the sample app do?
 ============================
 
@@ -84,7 +87,7 @@ If you are using **Gradle**, include the following in the dependencies closure f
         }
 
         compile 'com.android.support:support-v4:23.1.1'
-        compile 'com.localz.spotzpush.sdk:spotz-push-sdk-gcm:1.1.8@aar'
+        compile 'com.localz.spotzpush.sdk:spotz-push-sdk-gcm:1.1.9@aar'
     }
     
     ...
@@ -115,10 +118,9 @@ Add the following within the *application* element
             <!--Default service for Spotz Push. To add customisations to how notifications are handled,
                 create your own version which extends com.localz.spotzpush.sdk.service.AbstractGcmIntentService -->
             <service android:name="com.localz.spotzpush.sdk.service.GcmIntentService" />
+            <!--IntentService to handle the notification. Ensure that it matches the above service class!-->
+            <meta-data android:name="com.localz.spotzpush.sdk.handleNotification" android:value="com.localz.spotzpush.sdk.service.GcmIntentService" />
 
-            <!--Default receiver for Spotz Push, if com.localz.spotzpush.sdk.service.GcmBroadcastReceiver
-                is not used, then extend com.localz.spotzpush.sdk.receiver.DefaultBroadcastReceiver
-                and ensure to provide the full package and class name of the custom intent service to the AbstractGcmIntentService's constructor-->
             <receiver android:name="com.localz.spotzpush.sdk.receiver.GcmBroadcastReceiver" android:permission="com.google.android.c2dm.permission.SEND">
                 <intent-filter>
                     <action android:name="com.google.android.c2dm.intent.RECEIVE" />
