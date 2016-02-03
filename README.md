@@ -6,26 +6,37 @@ Spotz Push is a push notification platform.
 Changelog
 =========
 
-**1.0.0**	
+**1.0.0**
+
 * Initial public release.
 
 **1.0.1**
+
 * Incorporated changes required for version 1.0.1 of the Spotz Push SDK.
 
 **2.0.0**
+
 * Incorporated new SDK version to make compatible with Android 6.
 
 **2.0.1**
+
 * Bumped to latest SDK version and updated documentation.
 
 **2.0.2**
+
 * Bumped to latest SDK version and updated documentation.
 
 **2.0.3**
+
 * Fixed issue with re-initialising SDK when the device is yet to be issued a deviceId.
 
 **2.0.4**
+
 * IntentService to handle notification can now be configured via the AndroidManifest rather than extending DefaultBroadcastReceiver.
+
+**2.0.5**
+
+* Bumped to latest SDK version and updated documentation.
 
 What does the sample app do?
 ============================
@@ -44,12 +55,18 @@ The sample app requires devices running Android 4.0.3 or newer.
   2. Import the project:
     
     If you're using **Android Studio**, simply 'Open' the project.
-    
-  3. Create a Spotz Push organisation and application via the [Spotz Push Console](https://spotz-push.localz.io/#/login).
 
-  4. Log into the [Google Developer Console](https://console.developers.google.com/project) and ensure to have a project created. Note the 'Project Number' on the overview screen for the project, and ensure to enable 'Cloud Messaging for Android' on the APIs screen.
-    
-  5. Insert your Spotz Push application ID and key into the app/build.gradle file - these can be found in the Spotz console under your application and use the Android client key:
+  3. Log into the [Google Developer Console](https://console.developers.google.com/project) and ensure to have a project created with the package name of `com.sample.spotzpush`. Note the 'Project Number' on the overview screen for the project, and ensure to enable 'Cloud Messaging for Android' on the APIs screen.
+
+  4. **After enabling Google Cloud Messaging for your Google project**, create an API Key.
+
+  5. Create your `google-services.json` file by selecting the newly created project and package name at the [Google Services](https://developers.google.com/mobile/add) page, and save this file in the `app/` directory for the sample Android app.
+
+  6. Sign in and create a Spotz Push `Organisation` and `Application` via the [Spotz Push Console](https://console.localz.io/spotz-push).
+
+  7. Upload your GCM API key credentials via the `Push Configuration` menu for your Spotz Push Application, and ensure to provide the package name of the sample app (com.sample.spotzpush).
+
+  8. Insert your Spotz Push application ID and key into the app/build.gradle file - these can be found in the `App Settings` -> `App Keys` tab in the console, and use the Android client key:
 
         ...
         buildConfigField 'String', 'PLAY_PROJECT_ID', '"123456789012"'
@@ -57,7 +74,7 @@ The sample app requires devices running Android 4.0.3 or newer.
         buildConfigField 'String', 'SPOTZ_PUSH_PROJECT_KEY', '"11111111-aaaa-2222-bbbb-333333333333"'
         ...
 
-  5. Run it!
+  9. Run it!
 
 
 How to add the SDK to your own Project
@@ -87,7 +104,7 @@ If you are using **Gradle**, include the following in the dependencies closure f
         }
 
         compile 'com.android.support:support-v4:23.1.1'
-        compile 'com.localz.spotzpush.sdk:spotz-push-sdk-gcm:1.1.9@aar'
+        compile 'com.localz.spotzpush.sdk:spotz-push-sdk-gcm:1.2.3@aar'
     }
     
     ...

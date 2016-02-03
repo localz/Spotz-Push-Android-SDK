@@ -32,7 +32,15 @@ public class MainActivity extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+    }
 
+    @Override
+    protected void onResume() {
+        super.onResume();
+
+        SharedPreferences p = this.getSharedPreferences(Common.PUSH_PREFS, 0);
+        String deviceId = p.getString(Common.PUSH_PREFS_DEVICE_ID, "");
+        ((TextView) this.findViewById(R.id.deviceId)).setText(deviceId);
         if (checkPlayServices()) {
             //Initialise SpotzPushService with three keys: Google Project number for the app,
             //Spotz Push project ID, and the Spotz Push Android client key. They can all be directly
@@ -77,15 +85,6 @@ public class MainActivity extends Activity {
         else {
             Log.i(TAG, "No valid Google Play Services APK found.");
         }
-    }
-
-    @Override
-    protected void onResume() {
-        super.onResume();
-
-        SharedPreferences p = this.getSharedPreferences(Common.PUSH_PREFS, 0);
-        String deviceId = p.getString(Common.PUSH_PREFS_DEVICE_ID, "");
-        ((TextView) this.findViewById(R.id.deviceId)).setText(deviceId);
     }
 
     /**
