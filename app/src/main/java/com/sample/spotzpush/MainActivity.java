@@ -11,7 +11,7 @@ import android.util.Log;
 import android.widget.TextView;
 
 import com.google.android.gms.common.ConnectionResult;
-import com.google.android.gms.common.GooglePlayServicesUtil;
+import com.google.android.gms.common.GoogleApiAvailability;
 import com.localz.spotzpush.sdk.model.response.BaseJsonResponse;
 import com.localz.spotzpush.sdk.model.response.DeviceJsonResponse;
 import com.localz.spotzpush.sdk.service.SpotzPushService;
@@ -92,11 +92,14 @@ public class MainActivity extends Activity {
      * This is a prerequisite to be able to use push notifications.
      */
     private boolean checkPlayServices() {
-        int result = GooglePlayServicesUtil.isGooglePlayServicesAvailable(this);
+
+        GoogleApiAvailability googleApiAvailability = GoogleApiAvailability.getInstance();
+
+        int result = googleApiAvailability.isGooglePlayServicesAvailable(this);
 
         if (result != ConnectionResult.SUCCESS) {
-            if (GooglePlayServicesUtil.isUserRecoverableError(result)) {
-                GooglePlayServicesUtil.getErrorDialog(result, this, PLAY_SERVICES_RESOLUTION_REQUEST).show();
+            if (googleApiAvailability.isUserResolvableError(result)) {
+                googleApiAvailability.getErrorDialog(this, result, PLAY_SERVICES_RESOLUTION_REQUEST).show();
             }
             else {
                 Log.i(TAG, "This device is not supported.");

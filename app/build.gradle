@@ -7,10 +7,10 @@ android {
 
     defaultConfig {
         applicationId "com.sample.spotzpush"
-        minSdkVersion 15
+        minSdkVersion 16
         targetSdkVersion 23
-        versionCode 9
-        versionName "2.0.5"
+        versionCode 10
+        versionName "2.0.6"
 
         buildConfigField 'String', 'PLAY_PROJECT_ID', '"<Insert Google Project Number here>"'
         buildConfigField 'String', 'SPOTZ_PUSH_PROJECT_ID', '"Insert Spotz Push Project ID here"'
@@ -28,7 +28,7 @@ dependencies {
     compile fileTree(dir: 'libs', include: ['*.jar'])
 
     //Required for sample app only
-    compile 'com.android.support:appcompat-v7:23.1.1'
+    compile 'com.android.support:appcompat-v7:23.2.0'
 
     //Spotz Push SDK dependencies start
     compile 'com.google.android.gms:play-services-gcm:8.3.0'
@@ -43,7 +43,7 @@ dependencies {
         exclude module: 'httpclient'
     }
 
-    compile 'com.android.support:support-v4:23.1.1'
+    compile 'com.android.support:support-v4:23.2.0'
 
     compile 'com.localz.spotzpush.sdk:spotz-push-sdk-gcm:1.2.3@aar'
 }
