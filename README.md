@@ -42,6 +42,11 @@ Changelog
 
 * Bumped to latest SDK version and dependencies.
 
+**2.0.7**
+
+* Bumped to latest SDK version and dependencies.
+
+
 What does the sample app do?
 ============================
 
