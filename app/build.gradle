@@ -2,14 +2,14 @@ apply plugin: 'com.android.application'
 
 android {
     buildToolsVersion "24.0.2"
-    compileSdkVersion 24
+    compileSdkVersion 25
 
     defaultConfig {
         applicationId "com.sample.spotzpush"
         minSdkVersion 16
-        targetSdkVersion 24
-        versionCode 12
-        versionName "2.1.0"
+        targetSdkVersion 25
+        versionCode 13
+        versionName "2.1.1"
 
         buildConfigField 'String', 'SPOTZ_PUSH_PROJECT_ID', '"Insert Spotz Push Project ID here"'
         buildConfigField 'String', 'SPOTZ_PUSH_PROJECT_KEY', '"Insert Spotz Push Android Client key here"'
@@ -58,7 +58,7 @@ android {
         compile fileTree(dir: 'libs', include: ['*.jar'])
 
         //Required for sample app only
-        compile 'com.android.support:appcompat-v7:24.2.1'
+        compile 'com.android.support:appcompat-v7:25.0.1'
 
 
         //Spotz Push SDK dependencies start
@@ -70,7 +70,7 @@ android {
             exclude module: 'httpclient'
         }
 
-        compile 'com.android.support:support-v4:24.2.1'
+        compile 'com.android.support:support-v4:25.0.1'
 
         //Only required for FCM
         fcmCompile 'com.google.firebase:firebase-messaging:9.4.0'
