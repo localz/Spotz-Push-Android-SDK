@@ -8,8 +8,8 @@ android {
         applicationId "com.sample.spotzpush"
         minSdkVersion 16
         targetSdkVersion 25
-        versionCode 13
-        versionName "2.1.1"
+        versionCode 14
+        versionName "2.1.2"
 
         buildConfigField 'String', 'SPOTZ_PUSH_PROJECT_ID', '"Insert Spotz Push Project ID here"'
         buildConfigField 'String', 'SPOTZ_PUSH_PROJECT_KEY', '"Insert Spotz Push Android Client key here"'
@@ -58,7 +58,7 @@ android {
         compile fileTree(dir: 'libs', include: ['*.jar'])
 
         //Required for sample app only
-        compile 'com.android.support:appcompat-v7:25.0.1'
+        compile 'com.android.support:appcompat-v7:25.1.0'
 
 
         //Spotz Push SDK dependencies start
@@ -70,7 +70,7 @@ android {
             exclude module: 'httpclient'
         }
 
-        compile 'com.android.support:support-v4:25.0.1'
+        compile 'com.android.support:support-v4:25.1.0'
         compile 'com.google.android.gms:play-services-base:9.4.0'
 
         //Only required for FCM
@@ -85,7 +85,7 @@ android {
 
         //Only required for socket.io
         socketCompile 'com.localz.spotzpush.sdk:spotz-push-sdk-socket:1.2.2@aar'
-        socketCompile ('io.socket:socket.io-client:0.8.2') {
+        socketCompile ('io.socket:socket.io-client:0.8.3') {
             // excluding org.json which is provided by Android
             exclude group: 'org.json', module: 'json'
         }

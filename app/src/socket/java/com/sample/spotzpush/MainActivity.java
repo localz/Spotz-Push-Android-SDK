@@ -1,13 +1,8 @@
 package com.sample.spotzpush;
 
-import android.Manifest;
 import android.app.Activity;
 import android.content.SharedPreferences;
-import android.content.pm.PackageManager;
 import android.os.Bundle;
-import android.support.v4.app.ActivityCompat;
-import android.support.v4.content.ContextCompat;
-import android.util.Log;
 import android.widget.TextView;
 
 import com.localz.spotzpush.sdk.model.response.BaseJsonResponse;
@@ -60,26 +55,5 @@ public class MainActivity extends Activity {
                     }
                 }
         );
-
-        //If location push functions are to be utilised, then need to ask the user's permission to ACCESS_FINE_LOCATION
-        if (ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION)
-                != PackageManager.PERMISSION_GRANTED) {
-
-            // Should we show an explanation?
-            if (ActivityCompat.shouldShowRequestPermissionRationale(this, Manifest.permission.ACCESS_FINE_LOCATION)) {
-
-                // Show an expanation to the user *asynchronously* -- don't block
-                // this thread waiting for the user's response! After the user
-                // sees the explanation, try again to request the permission.
-
-            } else {
-
-                // No explanation needed, we can request the permission.
-                ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, PERMISSION_REQUEST_ACCESS_FINE_LOCATION);
-            }
-        }
-        else {
-            Log.i(TAG, "No valid Google Play Services APK found.");
-        }
     }
 }
