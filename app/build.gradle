@@ -1,7 +1,7 @@
 apply plugin: 'com.android.application'
 
 android {
-    buildToolsVersion "24.0.2"
+    buildToolsVersion "25.0.2"
     compileSdkVersion 25
 
     defaultConfig {
@@ -58,11 +58,10 @@ android {
         compile fileTree(dir: 'libs', include: ['*.jar'])
 
         //Required for sample app only
-        compile 'com.android.support:appcompat-v7:25.1.0'
-
+        compile 'com.android.support:appcompat-v7:25.3.1'
 
         //Spotz Push SDK dependencies start
-        compile 'com.google.code.gson:gson:2.4'
+        compile 'com.google.code.gson:gson:2.7'
         compile('com.google.http-client:google-http-client:1.20.0') {
             exclude module: 'httpclient'
         }
@@ -70,21 +69,21 @@ android {
             exclude module: 'httpclient'
         }
 
-        compile 'com.android.support:support-v4:25.1.0'
-        compile 'com.google.android.gms:play-services-base:9.4.0'
+        compile 'com.android.support:support-v4:25.3.1'
+        compile 'com.google.android.gms:play-services-base:10.2.1'
 
         //Only required for FCM
-        fcmCompile 'com.google.firebase:firebase-messaging:9.4.0'
-        fcmCompile 'com.google.android.gms:play-services-location:9.4.0'
-        fcmCompile 'com.localz.spotzpush.sdk:spotz-push-sdk-fcm:1.3.1@aar'
+        fcmCompile 'com.google.firebase:firebase-messaging:10.2.1'
+        fcmCompile 'com.google.android.gms:play-services-location:10.2.1'
+        fcmCompile 'com.localz.spotzpush.sdk:spotz-push-sdk-fcm:1.3.3@aar'
 
         //Only required for GCM
-        gcmCompile 'com.google.android.gms:play-services-gcm:9.4.0'
-        gcmCompile 'com.google.android.gms:play-services-location:9.4.0'
-        gcmCompile 'com.localz.spotzpush.sdk:spotz-push-sdk-gcm:1.3.0@aar'
+        gcmCompile 'com.google.android.gms:play-services-gcm:10.2.1'
+        gcmCompile 'com.google.android.gms:play-services-location:10.2.1'
+        gcmCompile 'com.localz.spotzpush.sdk:spotz-push-sdk-gcm:1.3.3@aar'
 
         //Only required for socket.io
-        socketCompile 'com.localz.spotzpush.sdk:spotz-push-sdk-socket:1.2.2@aar'
+        socketCompile 'com.localz.spotzpush.sdk:spotz-push-sdk-socket:1.3.5@aar'
         socketCompile ('io.socket:socket.io-client:0.8.3') {
             // excluding org.json which is provided by Android
             exclude group: 'org.json', module: 'json'
