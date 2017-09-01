@@ -16,6 +16,7 @@ buildscript {
 allprojects {
     repositories {
         jcenter()
+        maven { url 'https://maven.google.com' }
         maven { url "http://localz.github.io/mvn-repo" }
         maven { url 'http://clojars.org/repo' }
         flatDir {
