@@ -22,13 +22,16 @@ android {
     }
     productFlavors {
         fcm {
+            applicationId 'com.sample.spotzpush.fcm'
             versionName + '-fcm'
         }
         gcm {
+            applicationId 'com.sample.spotzpush.gcm'
             versionName + '-gcm'
             buildConfigField 'String', 'PLAY_PROJECT_ID', '"<Insert Google Project Number here>"'
         }
         socket {
+            applicationId 'com.sample.spotzpush.socket'
             versionName + '-socket'
         }
     }
@@ -96,4 +99,8 @@ android {
     }
 }
 
-apply plugin: 'com.google.gms.google-services'
+// socket doesn't need google-services
+if (!getGradle().getStartParameter().getTaskRequests()
+        .toString().contains("Socket")){
+    apply plugin: 'com.google.gms.google-services'
+}
