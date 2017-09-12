@@ -34,6 +34,10 @@ android {
             applicationId 'com.sample.spotzpush.socket'
             versionName + '-socket'
         }
+        pushy {
+            applicationId 'com.sample.spotzpush.pushy'
+            versionName + '-pushy'
+        }
     }
 
     sourceSets {
@@ -54,6 +58,12 @@ android {
             java.srcDirs = ['src/socket/java']
             res.srcDirs = ['src/socket/res']
             assets.srcDirs = ['src/socket/assets']
+        }
+        pushy {
+            manifest.srcFile 'src/pushy/AndroidManifest.xml'
+            java.srcDirs = ['src/pushy/java']
+            res.srcDirs = ['src/pushy/res']
+            assets.srcDirs = ['src/pushy/assets']
         }
     }
 
@@ -90,6 +100,7 @@ android {
         gcmCompile "com.google.android.gms:play-services-location:$playServicesVersion"
         gcmCompile "com.localz.spotzpush.sdk:spotz-push-sdk-gcm:$spotzPushSdkVersion@aar"
 
+        pushyCompile "com.localz.spotzpush.sdk:spotz-push-sdk-pushy:$spotzPushSdkVersion@aar"
         //Only required for socket.io
         socketCompile "com.localz.spotzpush.sdk:spotz-push-sdk-socket:$spotzPushSdkVersion@aar"
         socketCompile ('io.socket:socket.io-client:0.8.3') {
@@ -99,8 +110,9 @@ android {
     }
 }
 
-// socket doesn't need google-services
-if (!getGradle().getStartParameter().getTaskRequests()
-        .toString().contains("Socket")){
+// Only GCM and FCM need google-services
+if (getGradle().getStartParameter().getTaskRequests()
+        .toString().contains("Gcm") || getGradle().getStartParameter().getTaskRequests()
+        .toString().contains("Fcm")){
     apply plugin: 'com.google.gms.google-services'
 }
