@@ -29,7 +29,7 @@ Changelog
 **2.2.0**
 
 * Added changes to support Android O.
-* Added custom notification handler (see `CustomSpotzPushBroadcastReceiver.java` from fcm flavour).
+* Added custom notification handler (see *"Customise behaviour of SDK"* section below).
 
 Note: `GcmIntentService` has been deprecated.
 
@@ -52,7 +52,7 @@ The sample app requires devices running Android 4.0.3 or newer.
     
     If you're using **Android Studio 1.5 or higher**, simply 'Open' the project.
 
-  3. Log into the [Firebase  Console](https://console.firebase.google.com/) and create  project containing an app with the package name of `com.sample.spotzpush`.
+  3. Log into the [Firebase  Console](https://console.firebase.google.com/) and create  project containing an app with the package name of `com.sample.spotzpush.fcm`.
 
   4. Step through the [instructions available](https://firebase.google.com/docs/android/setup) in order to auto-generate the config file and server key.
 
@@ -113,7 +113,7 @@ There are two main ways to get started with the SDK.
 
 The quickest and easiest way is to utilise the defaults provided by the SDK with the following changes:
 
-###AndroidManifest.xml
+### AndroidManifest.xml
 
 Add the following within the *application* element. Note the FirebaseInstanceIdService is already included in the AndroidManifest by the SDK.
 
@@ -146,7 +146,7 @@ When the SpotzPushService is initialised, the app will automatically grab a devi
 
 Customise behaviour of SDK
 ============
-###com.localz.spotzpush.sdk.receiver.AbstractSpotzPushBroadcastReceiver
+### com.localz.spotzpush.sdk.receiver.AbstractSpotzPushBroadcastReceiver
 In order to customise how the notification appears on the device, this BroadcastReceiver will need to be extended, implementing the method:
 
     /**
