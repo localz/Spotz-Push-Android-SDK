@@ -38,6 +38,12 @@ android {
             applicationId 'com.sample.spotzpush.pushy'
             versionName + '-pushy'
         }
+        pusher {
+            applicationId 'com.sample.spotzpush.pusher'
+            versionName + '-pusher'
+            buildConfigField 'String', 'PUSHER_APP_KEY', '"<Insert Pusher App Key here>"'
+            buildConfigField 'String', 'PUSHER_CLUSTER', '"<Insert Pusher Cluster here>"'
+        }
     }
 
     sourceSets {
@@ -64,6 +70,12 @@ android {
             java.srcDirs = ['src/pushy/java']
             res.srcDirs = ['src/pushy/res']
             assets.srcDirs = ['src/pushy/assets']
+        }
+        pusher {
+            manifest.srcFile 'src/pusher/AndroidManifest.xml'
+            java.srcDirs = ['src/pusher/java']
+            res.srcDirs = ['src/pusher/res']
+            assets.srcDirs = ['src/pusher/assets']
         }
     }
 
@@ -100,7 +112,11 @@ android {
         gcmCompile "com.google.android.gms:play-services-location:$playServicesVersion"
         gcmCompile "com.localz.spotzpush.sdk:spotz-push-sdk-gcm:$spotzPushSdkVersion@aar"
 
+        //Only required for pushy
         pushyCompile "com.localz.spotzpush.sdk:spotz-push-sdk-pushy:$spotzPushSdkVersion@aar"
+        //Only required for pusher
+        pusherCompile "com.localz.spotzpush.sdk:spotz-push-sdk-pusher:$spotzPushSdkVersion@aar"
+        pusherCompile 'org.slf4j:slf4j-api:1.7.5'
         //Only required for socket.io
         socketCompile "com.localz.spotzpush.sdk:spotz-push-sdk-socket:$spotzPushSdkVersion@aar"
         socketCompile ('io.socket:socket.io-client:0.8.3') {

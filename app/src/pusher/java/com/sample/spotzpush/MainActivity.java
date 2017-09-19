@@ -1,14 +1,8 @@
 package com.sample.spotzpush;
 
 import android.app.Activity;
-import android.content.Context;
-import android.content.Intent;
 import android.content.SharedPreferences;
-import android.net.Uri;
-import android.os.Build;
 import android.os.Bundle;
-import android.os.PowerManager;
-import android.provider.Settings;
 import android.widget.TextView;
 
 import com.localz.spotzpush.sdk.model.response.BaseJsonResponse;
@@ -41,11 +35,13 @@ public class MainActivity extends Activity {
         String deviceId = p.getString(Common.PUSH_PREFS_DEVICE_ID, "");
         ((TextView) this.findViewById(R.id.deviceId)).setText(deviceId);
 
-        //Initialise SpotzPushService with three keys: Google Project number for the app,
+        //Initialise SpotzPushService with three keys: Pusher app key,
         //Spotz Push project ID, and the Spotz Push Android client key. They can all be directly
         //provided as a string.
         SpotzPushService.init(
                 this,
+                BuildConfig.PUSHER_APP_KEY,
+                BuildConfig.PUSHER_CLUSTER,
                 BuildConfig.SPOTZ_PUSH_PROJECT_ID,
                 BuildConfig.SPOTZ_PUSH_PROJECT_KEY,
                 //Optional callback to process tasks after registration is complete, can be null.
@@ -61,15 +57,5 @@ public class MainActivity extends Activity {
                     }
                 }
         );
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-            // allow app to always run in the background
-            PowerManager powerManager = (PowerManager) getSystemService(Context.POWER_SERVICE);
-            if (!powerManager.isIgnoringBatteryOptimizations(getPackageName())) {
-                Intent intent = new Intent();
-                intent.setAction(Settings.ACTION_REQUEST_IGNORE_BATTERY_OPTIMIZATIONS);
-                intent.setData(Uri.parse("package:" + getPackageName()));
-                startActivity(intent);
-            }
-        }
     }
 }
