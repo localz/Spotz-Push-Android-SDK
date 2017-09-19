@@ -1,8 +1,14 @@
 package com.sample.spotzpush;
 
 import android.app.Activity;
+import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
+import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
+import android.os.PowerManager;
+import android.provider.Settings;
 import android.widget.TextView;
 
 import com.localz.spotzpush.sdk.model.response.BaseJsonResponse;
@@ -55,5 +61,15 @@ public class MainActivity extends Activity {
                     }
                 }
         );
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            // allow app to always run in the background
+            PowerManager powerManager = (PowerManager) getSystemService(Context.POWER_SERVICE);
+            if (!powerManager.isIgnoringBatteryOptimizations(getPackageName())) {
+                Intent intent = new Intent();
+                intent.setAction(Settings.ACTION_REQUEST_IGNORE_BATTERY_OPTIMIZATIONS);
+                intent.setData(Uri.parse("package:" + getPackageName()));
+                startActivity(intent);
+            }
+        }
     }
 }
