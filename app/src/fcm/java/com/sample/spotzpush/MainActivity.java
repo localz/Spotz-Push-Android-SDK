@@ -1,9 +1,15 @@
 package com.sample.spotzpush;
 
 import android.Manifest;
+import android.annotation.TargetApi;
 import android.app.Activity;
+import android.app.NotificationChannel;
+import android.app.NotificationManager;
+import android.content.Context;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
+import android.graphics.Color;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
@@ -25,6 +31,7 @@ public class MainActivity extends Activity {
 
     public static final int  PERMISSION_REQUEST_ACCESS_FINE_LOCATION = 9010;
     public static final int PLAY_SERVICES_RESOLUTION_REQUEST = 9000;
+    public static final String NOTIFICATION_CHANNEL_ID = "com.sample.spotzpush.fcm.notification.id";
 
     private static final String TAG = MainActivity.class.getSimpleName();
 
@@ -32,6 +39,9 @@ public class MainActivity extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            createNotificationChannel(this);
+        }
     }
 
     @Override
@@ -70,7 +80,7 @@ public class MainActivity extends Activity {
                 // Should we show an explanation?
                 if (ActivityCompat.shouldShowRequestPermissionRationale(this, Manifest.permission.ACCESS_FINE_LOCATION)) {
 
-                    // Show an expanation to the user *asynchronously* -- don't block
+                    // Show an explanation to the user *asynchronously* -- don't block
                     // this thread waiting for the user's response! After the user
                     // sees the explanation, try again to request the permission.
 
@@ -133,5 +143,29 @@ public class MainActivity extends Activity {
         }
 
         return true;
+    }
+
+    @TargetApi(Build.VERSION_CODES.O)
+    private static void createNotificationChannel(Context context) {
+        NotificationManager notificationManager =
+                (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
+        NotificationChannel notificationChannel = notificationManager.getNotificationChannel(NOTIFICATION_CHANNEL_ID);
+        if (notificationChannel == null) {
+            // The user-visible name of the channel.
+            CharSequence channelName = "Spotz Push Notifications";
+            // The user-visible description of the channel.
+            String channelDescription = "Spotz Push Sample App Notification Channel";
+            int importance = NotificationManager.IMPORTANCE_DEFAULT;
+            notificationChannel = new NotificationChannel(NOTIFICATION_CHANNEL_ID, channelName, importance);
+            // Configure the notification channel.
+            notificationChannel.setDescription(channelDescription);
+            notificationChannel.enableLights(true);
+            // Sets the notification light color for notifications posted to this
+            // channel, if the device supports this feature.
+            notificationChannel.setLightColor(Color.RED);
+            notificationChannel.enableVibration(true);
+            notificationChannel.setVibrationPattern(new long[]{100, 200, 300, 400, 500, 400, 300, 200, 400});
+            notificationManager.createNotificationChannel(notificationChannel);
+        }
     }
 }

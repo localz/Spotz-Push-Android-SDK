@@ -17,12 +17,6 @@
         android:label="@string/app_name"
         android:theme="@style/AppTheme" >
 
-        <!--Default service for Spotz Push. To add customisations to how notifications are handled,
-            create your own version which extends com.localz.spotzpush.sdk.service.AbstractGcmIntentService -->
-        <service android:name="com.localz.spotzpush.sdk.service.GcmIntentService" />
-        <!--IntentService to handle the notification. Ensure that it matches the above service class!-->
-        <meta-data android:name="com.localz.spotzpush.sdk.handleNotification" android:value="com.localz.spotzpush.sdk.service.GcmIntentService" />
-
         <receiver android:name="com.localz.spotzpush.sdk.receiver.GcmBroadcastReceiver" android:permission="com.google.android.c2dm.permission.SEND">
             <intent-filter>
                 <action android:name="com.google.android.c2dm.intent.RECEIVE" />

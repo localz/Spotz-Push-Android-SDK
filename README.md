@@ -26,6 +26,13 @@ Changelog
 
 * Added support for FCM
 
+**2.2.0**
+
+* Added changes to support Android O.
+* Added custom notification handler (see *"Customise behaviour of SDK"* section below).
+
+Note: `GcmIntentService` has been deprecated.
+
 
 What does the sample app do?
 ============================
@@ -45,7 +52,7 @@ The sample app requires devices running Android 4.0.3 or newer.
     
     If you're using **Android Studio 1.5 or higher**, simply 'Open' the project.
 
-  3. Log into the [Firebase  Console](https://console.firebase.google.com/) and create  project containing an app with the package name of `com.sample.spotzpush`.
+  3. Log into the [Firebase  Console](https://console.firebase.google.com/) and create  project containing an app with the package name of `com.sample.spotzpush.fcm`.
 
   4. Step through the [instructions available](https://firebase.google.com/docs/android/setup) in order to auto-generate the config file and server key.
 
@@ -81,11 +88,11 @@ If you are using **Gradle**, include the following in the dependencies closure f
     }
 
     dependencies {
-        compile 'com.google.firebase:firebase-messaging:9.4.0'
-        compile 'com.google.android.gms:play-services-base:9.4.0'
-        compile 'com.google.android.gms:play-services-location:9.4.0'
+        compile 'com.google.firebase:firebase-messaging:11.2.0'
+        compile 'com.google.android.gms:play-services-base:11.2.0'
+        compile 'com.google.android.gms:play-services-location:11.2.0'
 
-        compile 'com.google.code.gson:gson:2.4'
+        compile 'com.google.code.gson:gson:2.8.1'
         compile('com.google.http-client:google-http-client:1.20.0') {
             exclude module: 'httpclient'
         }
@@ -93,8 +100,8 @@ If you are using **Gradle**, include the following in the dependencies closure f
             exclude module: 'httpclient'
         }
 
-        compile 'com.android.support:support-v4:24.2.1'
-        compile 'com.localz.spotzpush.sdk:spotz-push-sdk-fcm:1.3.0@aar'
+        compile 'com.android.support:support-v4:26.0.0'
+        compile 'com.localz.spotzpush.sdk:spotz-push-sdk-fcm:2.1.0@aar'
     }
     
     ...
@@ -106,15 +113,14 @@ There are two main ways to get started with the SDK.
 
 The quickest and easiest way is to utilise the defaults provided by the SDK with the following changes:
 
-###AndroidManifest.xml
+### AndroidManifest.xml
 
 Add the following within the *application* element. Note the FirebaseInstanceIdService is already included in the AndroidManifest by the SDK.
 
     ...
     <manifest>
         <application>
-            <!--Default service to handle incoming notifications for Spotz Push. To add customisations to how notifications are handled,
-                create your own version which extends com.localz.spotzpush.sdk.service.AbstractFirebaseService -->
+            <!--Default service to handle incoming notifications for Spotz Push. -->
             <service android:name="com.localz.spotzpush.sdk.service.FirebaseService" android:exported="false">
                 <intent-filter>
                     <action android:name="com.google.firebase.MESSAGING_EVENT"/>
@@ -140,12 +146,32 @@ When the SpotzPushService is initialised, the app will automatically grab a devi
 
 Customise behaviour of SDK
 ============
-###com.localz.spotzpush.sdk.service.AbstractFirebaseService
-In order to customise how the notification appears on the device, this class will need to be extended, implementing the method:
+### com.localz.spotzpush.sdk.receiver.AbstractSpotzPushBroadcastReceiver
+In order to customise how the notification appears on the device, this BroadcastReceiver will need to be extended, implementing the method:
 
-    public abstract void handleNotification(Map<String, String> extras, String title, String message, String sound, String imageUrl);
+    /**
+     * Executed when a new push notification is triggered.
+     *
+     * @param context
+     * @param notificationId notification id
+     * @param title notification title
+     * @param message notification message
+     * @param soundType ringtone type
+     * @param imageUrl image url
+     */
+    protected abstract void handleNotification(Context context, int notificationId, String title, String message, int soundType, String imageUrl);
 
-The `extras` parameter contains the push notification parsed into a Map. The Map contains the default (title, message, sound, imageUrl) and custom attributes of the notification. From this method, the `NotificationManager` can be freely called to display or manipulate the notification as desired.
+Note: see `CustomSpotzPushBroadcastReceiver.java` from fcm flavour.
+
+The BroadcastReceiver must be registered in the AndroidManifest.xml file:
+
+    <receiver android:name="com.sample.spotzpush.CustomSpotzPushBroadcastReceiver" android:exported="false">
+        <intent-filter>
+            <action android:name="com.localz.spotzpush.sdk.NOTIFICATION"/>
+        </intent-filter>
+    </receiver>
+
+From this method, the `NotificationManager` can be freely called to display or manipulate the notification as desired.
 
 
 Contribution
@@ -156,4 +182,4 @@ For bugs, feature requests, or other questions, [file an issue](https://github.c
 License
 =======
 
-Copyright 2015 [Localz Pty Ltd](http://www.localz.com/)
+Copyright 2017 [Localz Pty Ltd](http://www.localz.com/)
