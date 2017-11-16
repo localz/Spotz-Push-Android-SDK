@@ -23,6 +23,13 @@
             </intent-filter>
         </receiver>
 
+        <!-- Custom notification listener, must extend `com.localz.spotzpush.sdk.receiver.AbstractSpotzPushBroadcastReceiver` -->
+        <receiver android:name="com.sample.spotzpush.CustomSpotzPushBroadcastReceiver" android:exported="false">
+            <intent-filter>
+                <action android:name="com.localz.spotzpush.sdk.NOTIFICATION"/>
+            </intent-filter>
+        </receiver>
+
     </application>
 
 </manifest>
