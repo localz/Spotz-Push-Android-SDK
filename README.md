@@ -28,11 +28,14 @@ Changelog
 
 **2.2.0**
 
-* Added changes to support Android O.
+* Added changes to support Android 8 (Oreo).
 * Added custom notification handler (see *"Customise behaviour of SDK"* section below).
 
 Note: `GcmIntentService` has been deprecated.
 
+**2.2.1**
+
+* Added additional push message handler with access to original push message data.
 
 What does the sample app do?
 ============================
@@ -88,9 +91,9 @@ If you are using **Gradle**, include the following in the dependencies closure f
     }
 
     dependencies {
-        compile 'com.google.firebase:firebase-messaging:11.2.0'
-        compile 'com.google.android.gms:play-services-base:11.2.0'
-        compile 'com.google.android.gms:play-services-location:11.2.0'
+        compile 'com.google.firebase:firebase-messaging:11.4.2'
+        compile 'com.google.android.gms:play-services-base:11.4.2'
+        compile 'com.google.android.gms:play-services-location:11.4.2'
 
         compile 'com.google.code.gson:gson:2.8.1'
         compile('com.google.http-client:google-http-client:1.20.0') {
@@ -100,8 +103,8 @@ If you are using **Gradle**, include the following in the dependencies closure f
             exclude module: 'httpclient'
         }
 
-        compile 'com.android.support:support-v4:26.0.0'
-        compile 'com.localz.spotzpush.sdk:spotz-push-sdk-fcm:2.1.0@aar'
+        compile 'com.android.support:support-v4:27.0.0'
+        compile 'com.localz.spotzpush.sdk:spotz-push-sdk-fcm:2.1.1@aar'
     }
     
     ...
@@ -147,7 +150,7 @@ When the SpotzPushService is initialised, the app will automatically grab a devi
 Customise behaviour of SDK
 ============
 ### com.localz.spotzpush.sdk.receiver.AbstractSpotzPushBroadcastReceiver
-In order to customise how the notification appears on the device, this BroadcastReceiver will need to be extended, implementing the method:
+In order to customise how the notification appears on the device, this BroadcastReceiver will need to be extended, implementing one of these methods:
 
     /**
      * Executed when a new push notification is triggered.
@@ -160,6 +163,16 @@ In order to customise how the notification appears on the device, this Broadcast
      * @param imageUrl image url
      */
     protected abstract void handleNotification(Context context, int notificationId, String title, String message, int soundType, String imageUrl);
+
+    /**
+     * Customer handler for a push notification.
+     *
+     * @param context
+     * @param extras all original data received from push server
+     * @return <code>true</code> if a notification has been handled and no further action required,
+     * otherwise <code>false</code>
+     */
+    protected boolean handleNotification(Context context, @Nullable Bundle extras)
 
 Note: see `CustomSpotzPushBroadcastReceiver.java` from fcm flavour.
 
