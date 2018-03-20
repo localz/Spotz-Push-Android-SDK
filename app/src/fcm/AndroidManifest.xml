@@ -2,11 +2,27 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android">
 
     <application>
-        <service android:name="com.localz.spotzpush.sdk.service.FirebaseService" android:exported="false">
-            <intent-filter>
-                <action android:name="com.google.firebase.MESSAGING_EVENT"/>
+        <!-- These service declarations are only required if manifest merging is disabled (they are declared in SDK) -->
+
+        <!--<service android:name="com.localz.spotzpush.sdk.service.FirebaseService" android:exported="false">-->
+            <!--<intent-filter>-->
+                <!--<action android:name="com.google.firebase.MESSAGING_EVENT"/>-->
+            <!--</intent-filter>-->
+        <!--</service>-->
+
+        <!--<service android:name="com.localz.spotzpush.sdk.service.InstanceIdService" android:exported="false">-->
+            <!--<intent-filter>-->
+                <!--<action android:name="com.google.firebase.INSTANCE_ID_EVENT"/>-->
+            <!--</intent-filter>-->
+        <!--</service>-->
+
+        <!--<service
+            android:name="com.google.firebase.messaging.FirebaseMessagingService"
+            android:exported="true" >
+            <intent-filter android:priority="-500" >
+                <action android:name="com.google.firebase.MESSAGING_EVENT" />
             </intent-filter>
-        </service>
+        </service>-->
 
         <!-- Custom notification listener, must extend `com.localz.spotzpush.sdk.receiver.AbstractSpotzPushBroadcastReceiver` -->
         <receiver android:name="com.sample.spotzpush.CustomSpotzPushBroadcastReceiver" android:exported="false">
