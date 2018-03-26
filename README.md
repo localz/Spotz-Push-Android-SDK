@@ -37,12 +37,16 @@ Note: `GcmIntentService` has been deprecated.
 
 * Added additional push message handler with access to original push message data.
 
+**2.2.2**
+
+* Upgraded Push SDK and updated documentation.
+
 What does the sample app do?
 ============================
 
 The app demonstrates how to import the SDK to be able to use Spotz Push.
 
-How to run the sample app
+How to run the sample app (FCM variant)
 =========================
 
 The sample app requires devices running Android 4.0.3 or newer.
@@ -80,7 +84,26 @@ The sample app requires devices running Android 4.0.3 or newer.
 How to add the SDK to your own Project
 ======================================
 
-If you are using **Gradle**, include the following in the dependencies closure for the app.
+If you are using **Gradle**, include the following:
+
+For FCM and GCM variants only, include the following plugin in your project `build.gradle`:
+
+    ...
+    buildscript {
+        dependencies {
+            classpath 'com.google.gms:google-services:3.0.0'
+        }
+    }
+    ...
+
+For FCM and GCM variants only, include the following plugin in your app module `build.gradle`:
+    
+    // should follow the dependencies declaration 
+    ...
+    apply plugin: 'com.google.gms.google-services'
+    ...
+
+Include these common dependencies in the dependencies closure for the app:
 
     ...
 
@@ -91,23 +114,66 @@ If you are using **Gradle**, include the following in the dependencies closure f
     }
 
     dependencies {
-        compile 'com.google.firebase:firebase-messaging:11.4.2'
-        compile 'com.google.android.gms:play-services-base:11.4.2'
-        compile 'com.google.android.gms:play-services-location:11.4.2'
-
-        compile 'com.google.code.gson:gson:2.8.1'
-        compile('com.google.http-client:google-http-client:1.20.0') {
+        compile 'com.android.support:support-v4:27.1.0'
+        compile 'com.google.code.gson:gson:2.8.2'
+        compile('com.google.http-client:google-http-client:1.21.0') {
             exclude module: 'httpclient'
         }
-        compile('com.google.http-client:google-http-client-gson:1.20.0') {
+        compile('com.google.http-client:google-http-client-gson:1.21.0') {
             exclude module: 'httpclient'
         }
-
-        compile 'com.android.support:support-v4:27.0.0'
-        compile 'com.localz.spotzpush.sdk:spotz-push-sdk-fcm:2.1.1@aar'
+        compile 'com.google.android.gms:play-services-location:11.6.0'
+        ...
     }
-    
     ...
+
+Dependencies specific for FCM
+
+    dependencies {
+        ...
+        compile 'com.google.firebase:firebase-messaging:11.6.0'
+        compile 'com.google.android.gms:play-services-base:11.6.0'
+        compile 'com.localz.spotzpush.sdk:spotz-push-sdk-fcm:2.2.1@aar'
+        ...
+    }
+
+Dependencies specific for GCM
+
+    dependencies {
+        ...
+        compile 'com.google.android.gms:play-services-gcm:11.6.0'
+        compile 'com.localz.spotzpush.sdk:spotz-push-sdk-gcm:2.2.1@aar'
+        ...
+    }
+
+Dependencies specific for Socket IO
+
+    dependencies {
+        ...
+        compile('io.socket:socket.io-client:0.8.3') {
+            exclude group: 'org.json', module: 'json'
+        }
+        compile 'com.localz.spotzpush.sdk:spotz-push-sdk-socket:2.2.1@aar'
+        ...
+    }
+
+Dependencies specific for Pusher
+
+    dependencies {
+        ...
+        compile 'org.slf4j:slf4j-api:1.7.5'
+        compile 'com.localz.spotzpush.sdk:spotz-push-sdk-pusher:2.2.1@aar'
+        ...
+    }
+
+Dependencies specific for Pushy
+
+    dependencies {
+        ...
+        compile 'com.localz.spotzpush.sdk:spotz-push-sdk-pushy:2.2.1@aar'
+        ...
+    }
+
 
 How to use the SDK
 ==================
@@ -118,26 +184,150 @@ The quickest and easiest way is to utilise the defaults provided by the SDK with
 
 ### AndroidManifest.xml
 
-Add the following within the *application* element. Note the FirebaseInstanceIdService is already included in the AndroidManifest by the SDK.
+Add the following services, receivers and permission within the *application* element:
+
+For FCM (if your project is not using automatic manifest merging)
 
     ...
     <manifest>
+        <uses-permission android:name="com.google.android.c2dm.permission.RECEIVE" />
+            
         <application>
-            <!--Default service to handle incoming notifications for Spotz Push. -->
-            <service android:name="com.localz.spotzpush.sdk.service.FirebaseService" android:exported="false">
+            <service
+                android:name="com.google.firebase.messaging.FirebaseMessagingService"
+                android:exported="true" >
+                <intent-filter android:priority="-500" >
+                    <action android:name="com.google.firebase.MESSAGING_EVENT" />
+                </intent-filter>
+            </service>
+            <service
+                android:name="com.localz.spotzpush.sdk.service.FirebaseService"
+                android:exported="false" >
                 <intent-filter>
-                    <action android:name="com.google.firebase.MESSAGING_EVENT"/>
+                    <action android:name="com.google.firebase.MESSAGING_EVENT" />
+                </intent-filter>
+            </service>
+            <service
+                android:name="com.localz.spotzpush.sdk.service.InstanceIdService"
+                android:exported="false" >
+                <intent-filter>
+                    <action android:name="com.google.firebase.INSTANCE_ID_EVENT" />
                 </intent-filter>
             </service>
         </application>
     </manifest>
     ...
 
+For GCM (you **MUST** include `GcmBroadcastReceiver` declaration)
+
+    ...
+    <manifest>
+        <permission
+            android:name="com.localz.spotzpush.sdk.permission.C2D_MESSAGE"
+            android:protectionLevel="signature" />
+        
+        <uses-permission android:name="com.google.android.c2dm.permission.RECEIVE" />
+        <uses-permission android:name="com.localz.spotzpush.sdk.permission.C2D_MESSAGE" />
+
+        <application>
+            <receiver
+                android:name="com.localz.spotzpush.sdk.receiver.GcmBroadcastReceiver"
+                android:permission="com.google.android.c2dm.permission.SEND" >
+                <intent-filter>
+                    <action android:name="com.google.android.c2dm.intent.RECEIVE" />
+                </intent-filter>
+            </receiver>
+        </application>
+    </manifest>
+    ...
+
+For Socket IO (if your project is not using automatic manifest merging)
+
+    ...
+    <manifest>
+        <application>
+            <receiver android:name="com.localz.spotzpush.sdk.receiver.RestartReceiver" >
+                <intent-filter>
+                    <action android:name="android.intent.action.BOOT_COMPLETED" />
+                </intent-filter>
+            </receiver>
+            
+            <service android:name="com.localz.spotzpush.sdk.service.BaseBackgroundSocketIoService" />
+        </application>
+    </manifest>
+    ...
+
+For Pusher (if your project is not using automatic manifest merging)
+
+    ...
+    <manifest>
+        <application>
+            <receiver android:name="com.localz.spotzpush.sdk.receiver.RestartReceiver" >
+                <intent-filter>
+                    <action android:name="android.intent.action.BOOT_COMPLETED" />
+                </intent-filter>
+            </receiver>
+            
+            <service
+                android:name="com.localz.spotzpush.sdk.service.BackgroundPusherService"
+                android:exported="false" >
+            </service>
+        </application>
+    </manifest>
+    ...
+
+For Pushy (if your project is not using automatic manifest merging)
+
+    ...
+    <manifest>
+        <application>
+            <receiver android:name="com.localz.spotzpush.sdk.receiver.PushyBroadcastReceiver" android:exported="false">
+                <intent-filter>
+                    <action android:name="pushy.me" />
+                </intent-filter>
+            </receiver>
+    
+            <receiver android:name="me.pushy.sdk.receivers.PushyUpdateReceiver">
+                <intent-filter>
+                    <action android:name="android.intent.action.PACKAGE_REPLACED" />
+                    <data android:scheme="package" />
+                </intent-filter>
+            </receiver>
+    
+            <receiver android:name="me.pushy.sdk.receivers.PushyBootReceiver" >
+                <intent-filter>
+                    <action android:name="android.intent.action.BOOT_COMPLETED"/>
+                </intent-filter>
+            </receiver>
+    
+            <service android:name="me.pushy.sdk.services.PushySocketService"/>
+        </application>
+    </manifest>
+    ...
+
 Within the app, include the following
 
+For FCM, Socket IO and Pushy variants:
+    
     ...
     
     SpotzPushService.init(android.content.Context, "your-spotz-push-project-id", "your-spotz-push-client-key");
+
+    ...
+    
+For GCM variant:
+    
+    ...
+    
+    SpotzPushService.init(android.content.Context, "your-google-project-number", "your-spotz-push-project-id", "your-spotz-push-client-key");
+
+    ...
+    
+For Pusher variant:
+    
+    ...
+    
+    SpotzPushService.init(android.content.Context, "your-pusher-app-key", "your-pusher-app-cluster", "your-spotz-push-project-id", "your-spotz-push-client-key");
 
     ...
 
@@ -195,4 +385,4 @@ For bugs, feature requests, or other questions, [file an issue](https://github.c
 License
 =======
 
-Copyright 2017 [Localz Pty Ltd](http://www.localz.com/)
+Copyright 2018 [Localz Pty Ltd](http://www.localz.com/)

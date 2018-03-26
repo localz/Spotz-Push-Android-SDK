@@ -6,5 +6,15 @@
         android:icon="@drawable/logo"
         android:label="@string/app_name"
         android:theme="@style/AppTheme" >
+
+        <!-- These declarations are only required if manifest merging is disabled (they are declared in SDK) -->
+
+        <!--<receiver android:name="com.localz.spotzpush.sdk.receiver.RestartReceiver">-->
+            <!--<intent-filter>-->
+                <!--<action android:name="android.intent.action.BOOT_COMPLETED" />-->
+            <!--</intent-filter>-->
+        <!--</receiver>-->
+
+        <!--<service android:name="com.localz.spotzpush.sdk.service.BackgroundPusherService" android:exported="false"/>-->
     </application>
 </manifest>

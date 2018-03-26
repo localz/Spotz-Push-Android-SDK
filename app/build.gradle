@@ -8,8 +8,8 @@ android {
         applicationId "com.sample.spotzpush"
         minSdkVersion 16
         targetSdkVersion 27
-        versionCode 18
-        versionName "2.2.1"
+        versionCode 19
+        versionName "2.2.2"
 
         buildConfigField 'String', 'SPOTZ_PUSH_PROJECT_ID', '"Insert Spotz Push Project ID here"'
         buildConfigField 'String', 'SPOTZ_PUSH_PROJECT_KEY', '"Insert Spotz Push Android Client key here"'
@@ -87,9 +87,9 @@ android {
     }
 
     ext {
-        supportLibVersion = "27.0.0"
-        playServicesVersion = "11.4.2"
-        spotzPushSdkVersion = "2.1.1"
+        supportLibVersion = "27.1.0"
+        playServicesVersion = "11.6.0"
+        spotzPushSdkVersion = "2.2.1"
     }
 
     dependencies {
@@ -99,7 +99,7 @@ android {
         compile "com.android.support:appcompat-v7:$supportLibVersion"
 
         //Spotz Push SDK dependencies start
-        compile 'com.google.code.gson:gson:2.8.1'
+        compile 'com.google.code.gson:gson:2.8.2'
         compile('com.google.http-client:google-http-client:1.21.0') {
             exclude module: 'httpclient'
         }

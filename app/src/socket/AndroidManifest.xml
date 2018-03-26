@@ -8,5 +8,9 @@
         android:icon="@drawable/logo"
         android:label="@string/app_name"
         android:theme="@style/AppTheme" >
+
+        <!-- `BaseBackgroundSocketIoService` declaration is only required if manifest merging is disabled (it is declared in SDK) -->
+
+        <!--<service android:name="com.localz.spotzpush.sdk.service.BaseBackgroundSocketIoService" />-->
     </application>
 </manifest>
