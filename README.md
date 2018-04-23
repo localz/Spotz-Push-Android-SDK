@@ -53,11 +53,9 @@ The sample app requires devices running Android 4.0.3 or newer.
 
   1. Clone the repository:
   
-        git clone git@github.com:localz/spotz-push-sdk-android.git
+        `git clone git@github.com:localz/Spotz-Push-Android-SDK.git`
 
   2. Import the project:
-    
-    If you're using **Android Studio 1.5 or higher**, simply 'Open' the project.
 
   3. Log into the [Firebase  Console](https://console.firebase.google.com/) and create  project containing an app with the package name of `com.sample.spotzpush.fcm`.
 
@@ -91,7 +89,7 @@ For FCM and GCM variants only, include the following plugin in your project `bui
     ...
     buildscript {
         dependencies {
-            classpath 'com.google.gms:google-services:3.0.0'
+            classpath 'com.google.gms:google-services:3.2.1'
         }
     }
     ...
@@ -109,20 +107,20 @@ Include these common dependencies in the dependencies closure for the app:
 
     allprojects {
         repositories {
-            maven { url "http://localz.github.io/mvn-repo" }
+            maven { url "https://localz.github.io/mvn-repo" }
         }
     }
 
     dependencies {
-        compile 'com.android.support:support-v4:27.1.0'
+        compile 'com.android.support:support-v4:27.1.1'
         compile 'com.google.code.gson:gson:2.8.2'
-        compile('com.google.http-client:google-http-client:1.21.0') {
+        compile('com.google.http-client:google-http-client:1.23.0') {
             exclude module: 'httpclient'
         }
-        compile('com.google.http-client:google-http-client-gson:1.21.0') {
+        compile('com.google.http-client:google-http-client-gson:1.23.0') {
             exclude module: 'httpclient'
         }
-        compile 'com.google.android.gms:play-services-location:11.6.0'
+        compile 'com.google.android.gms:play-services-location:11.8.0'
         ...
     }
     ...
@@ -131,18 +129,9 @@ Dependencies specific for FCM
 
     dependencies {
         ...
-        compile 'com.google.firebase:firebase-messaging:11.6.0'
-        compile 'com.google.android.gms:play-services-base:11.6.0'
+        compile 'com.google.firebase:firebase-messaging:11.8.0'
+        compile 'com.google.android.gms:play-services-base:11.8.0'
         compile 'com.localz.spotzpush.sdk:spotz-push-sdk-fcm:2.2.1@aar'
-        ...
-    }
-
-Dependencies specific for GCM
-
-    dependencies {
-        ...
-        compile 'com.google.android.gms:play-services-gcm:11.6.0'
-        compile 'com.localz.spotzpush.sdk:spotz-push-sdk-gcm:2.2.1@aar'
         ...
     }
 
@@ -150,7 +139,7 @@ Dependencies specific for Socket IO
 
     dependencies {
         ...
-        compile('io.socket:socket.io-client:0.8.3') {
+        compile('io.socket:socket.io-client:1.0.0') {
             exclude group: 'org.json', module: 'json'
         }
         compile 'com.localz.spotzpush.sdk:spotz-push-sdk-socket:2.2.1@aar'
@@ -161,7 +150,7 @@ Dependencies specific for Pusher
 
     dependencies {
         ...
-        compile 'org.slf4j:slf4j-api:1.7.5'
+        compile 'org.slf4j:slf4j-api:1.7.25'
         compile 'com.localz.spotzpush.sdk:spotz-push-sdk-pusher:2.2.1@aar'
         ...
     }
@@ -214,29 +203,6 @@ For FCM (if your project is not using automatic manifest merging)
                     <action android:name="com.google.firebase.INSTANCE_ID_EVENT" />
                 </intent-filter>
             </service>
-        </application>
-    </manifest>
-    ...
-
-For GCM (you **MUST** include `GcmBroadcastReceiver` declaration)
-
-    ...
-    <manifest>
-        <permission
-            android:name="com.localz.spotzpush.sdk.permission.C2D_MESSAGE"
-            android:protectionLevel="signature" />
-        
-        <uses-permission android:name="com.google.android.c2dm.permission.RECEIVE" />
-        <uses-permission android:name="com.localz.spotzpush.sdk.permission.C2D_MESSAGE" />
-
-        <application>
-            <receiver
-                android:name="com.localz.spotzpush.sdk.receiver.GcmBroadcastReceiver"
-                android:permission="com.google.android.c2dm.permission.SEND" >
-                <intent-filter>
-                    <action android:name="com.google.android.c2dm.intent.RECEIVE" />
-                </intent-filter>
-            </receiver>
         </application>
     </manifest>
     ...
@@ -314,15 +280,7 @@ For FCM, Socket IO and Pushy variants:
     SpotzPushService.init(android.content.Context, "your-spotz-push-project-id", "your-spotz-push-client-key");
 
     ...
-    
-For GCM variant:
-    
-    ...
-    
-    SpotzPushService.init(android.content.Context, "your-google-project-number", "your-spotz-push-project-id", "your-spotz-push-client-key");
 
-    ...
-    
 For Pusher variant:
     
     ...

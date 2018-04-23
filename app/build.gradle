@@ -1,7 +1,6 @@
 apply plugin: 'com.android.application'
 
 android {
-    buildToolsVersion "26.0.2"
     compileSdkVersion 27
 
     defaultConfig {
@@ -27,12 +26,6 @@ android {
             dimension "default"
             applicationId 'com.sample.spotzpush.fcm'
             versionName + '-fcm'
-        }
-        gcm {
-            dimension "default"
-            applicationId 'com.sample.spotzpush.gcm'
-            versionName + '-gcm'
-            buildConfigField 'String', 'PLAY_PROJECT_ID', '"<Insert Google Project Number here>"'
         }
         socket {
             dimension "default"
@@ -60,12 +53,6 @@ android {
             res.srcDirs = ['src/fcm/res']
             assets.srcDirs = ['src/fcm/assets']
         }
-        gcm {
-            manifest.srcFile 'src/gcm/AndroidManifest.xml'
-            java.srcDirs = ['src/gcm/java']
-            res.srcDirs = ['src/gcm/res']
-            assets.srcDirs = ['src/gcm/assets']
-        }
         socket {
             manifest.srcFile 'src/socket/AndroidManifest.xml'
             java.srcDirs = ['src/socket/java']
@@ -88,7 +75,7 @@ android {
 
     ext {
         supportLibVersion = "27.1.0"
-        playServicesVersion = "11.6.0"
+        playServicesVersion = "11.8.0"
         spotzPushSdkVersion = "2.2.1"
     }
 
@@ -100,10 +87,10 @@ android {
 
         //Spotz Push SDK dependencies start
         compile 'com.google.code.gson:gson:2.8.2'
-        compile('com.google.http-client:google-http-client:1.21.0') {
+        compile('com.google.http-client:google-http-client:1.23.0') {
             exclude module: 'httpclient'
         }
-        compile('com.google.http-client:google-http-client-gson:1.21.0') {
+        compile('com.google.http-client:google-http-client-gson:1.23.0') {
             exclude module: 'httpclient'
         }
 
@@ -114,16 +101,12 @@ android {
         fcmCompile "com.google.firebase:firebase-messaging:$playServicesVersion"
         fcmCompile "com.google.android.gms:play-services-location:$playServicesVersion"
         fcmCompile "com.localz.spotzpush.sdk:spotz-push-sdk-fcm:$spotzPushSdkVersion@aar"
-        //Only required for GCM
-        gcmCompile "com.google.android.gms:play-services-gcm:$playServicesVersion"
-        gcmCompile "com.google.android.gms:play-services-location:$playServicesVersion"
-        gcmCompile "com.localz.spotzpush.sdk:spotz-push-sdk-gcm:$spotzPushSdkVersion@aar"
 
         //Only required for pushy
         pushyCompile "com.localz.spotzpush.sdk:spotz-push-sdk-pushy:$spotzPushSdkVersion@aar"
         //Only required for pusher
         pusherCompile "com.localz.spotzpush.sdk:spotz-push-sdk-pusher:$spotzPushSdkVersion@aar"
-        pusherCompile 'org.slf4j:slf4j-api:1.7.5'
+        pusherCompile 'org.slf4j:slf4j-api:1.7.25'
         //Only required for socket.io
         socketCompile "com.localz.spotzpush.sdk:spotz-push-sdk-socket:$spotzPushSdkVersion@aar"
         socketCompile ('io.socket:socket.io-client:0.8.3') {
