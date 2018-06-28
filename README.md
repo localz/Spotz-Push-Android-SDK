@@ -41,6 +41,10 @@ Note: `GcmIntentService` has been deprecated.
 
 * Upgraded Push SDK and updated documentation.
 
+**2.2.3**
+
+* Upgraded dependencies and documentation. Spotz Push no longer supports GCM.
+
 What does the sample app do?
 ============================
 
@@ -84,7 +88,7 @@ How to add the SDK to your own Project
 
 If you are using **Gradle**, include the following:
 
-For FCM and GCM variants only, include the following plugin in your project `build.gradle`:
+For FCM variant only, include the following plugin in your project `build.gradle`:
 
     ...
     buildscript {
@@ -94,7 +98,7 @@ For FCM and GCM variants only, include the following plugin in your project `bui
     }
     ...
 
-For FCM and GCM variants only, include the following plugin in your app module `build.gradle`:
+For FCM variant only, include the following plugin in your app module `build.gradle`:
     
     // should follow the dependencies declaration 
     ...

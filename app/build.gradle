@@ -74,51 +74,50 @@ android {
     }
 
     ext {
-        supportLibVersion = "27.1.0"
+        supportLibVersion = "27.1.1"
         playServicesVersion = "11.8.0"
-        spotzPushSdkVersion = "2.2.1"
+        spotzPushSdkVersion = "2.2.4"
     }
 
     dependencies {
-        compile fileTree(dir: 'libs', include: ['*.jar'])
+        api fileTree(dir: 'libs', include: ['*.jar'])
 
         //Required for sample app only
-        compile "com.android.support:appcompat-v7:$supportLibVersion"
+        api "com.android.support:appcompat-v7:$supportLibVersion"
 
         //Spotz Push SDK dependencies start
-        compile 'com.google.code.gson:gson:2.8.2'
-        compile('com.google.http-client:google-http-client:1.23.0') {
+        api 'com.google.code.gson:gson:2.8.2'
+        api('com.google.http-client:google-http-client:1.23.0') {
             exclude module: 'httpclient'
         }
-        compile('com.google.http-client:google-http-client-gson:1.23.0') {
+        api('com.google.http-client:google-http-client-gson:1.23.0') {
             exclude module: 'httpclient'
         }
 
-        compile "com.android.support:support-v4:$supportLibVersion"
-        compile "com.google.android.gms:play-services-base:$playServicesVersion"
+        api "com.android.support:support-v4:$supportLibVersion"
+        api "com.google.android.gms:play-services-base:$playServicesVersion"
 
         //Only required for FCM
-        fcmCompile "com.google.firebase:firebase-messaging:$playServicesVersion"
-        fcmCompile "com.google.android.gms:play-services-location:$playServicesVersion"
-        fcmCompile "com.localz.spotzpush.sdk:spotz-push-sdk-fcm:$spotzPushSdkVersion@aar"
+        fcmApi "com.google.firebase:firebase-messaging:$playServicesVersion"
+        fcmApi "com.google.android.gms:play-services-location:$playServicesVersion"
+        fcmApi "com.localz.spotzpush.sdk:spotz-push-sdk-fcm:$spotzPushSdkVersion@aar"
 
         //Only required for pushy
-        pushyCompile "com.localz.spotzpush.sdk:spotz-push-sdk-pushy:$spotzPushSdkVersion@aar"
+        pushyApi "com.localz.spotzpush.sdk:spotz-push-sdk-pushy:$spotzPushSdkVersion@aar"
         //Only required for pusher
-        pusherCompile "com.localz.spotzpush.sdk:spotz-push-sdk-pusher:$spotzPushSdkVersion@aar"
-        pusherCompile 'org.slf4j:slf4j-api:1.7.25'
+        pusherApi "com.localz.spotzpush.sdk:spotz-push-sdk-pusher:$spotzPushSdkVersion@aar"
+        pusherApi 'org.slf4j:slf4j-api:1.7.25'
         //Only required for socket.io
-        socketCompile "com.localz.spotzpush.sdk:spotz-push-sdk-socket:$spotzPushSdkVersion@aar"
-        socketCompile ('io.socket:socket.io-client:0.8.3') {
+        socketApi "com.localz.spotzpush.sdk:spotz-push-sdk-socket:$spotzPushSdkVersion@aar"
+        socketApi ('io.socket:socket.io-client:1.0.0') {
             // excluding org.json which is provided by Android
             exclude group: 'org.json', module: 'json'
         }
     }
 }
 
-// Only GCM and FCM need google-services
+// Only FCM needs google-services
 if (getGradle().getStartParameter().getTaskRequests()
-        .toString().contains("Gcm") || getGradle().getStartParameter().getTaskRequests()
-        .toString().contains("Fcm")){
+        .toString().contains("Fcm") || getGradle().getStartParameter().getTaskRequests()){
     apply plugin: 'com.google.gms.google-services'
 }
