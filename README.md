@@ -117,7 +117,7 @@ Include these common dependencies in the dependencies closure for the app:
 
     dependencies {
         compile 'com.android.support:support-v4:27.1.1'
-        compile 'com.google.code.gson:gson:2.8.2'
+        compile 'com.google.code.gson:gson:2.8.5'
         compile('com.google.http-client:google-http-client:1.23.0') {
             exclude module: 'httpclient'
         }
@@ -135,7 +135,7 @@ Dependencies specific for FCM
         ...
         compile 'com.google.firebase:firebase-messaging:11.8.0'
         compile 'com.google.android.gms:play-services-base:11.8.0'
-        compile 'com.localz.spotzpush.sdk:spotz-push-sdk-fcm:2.2.1@aar'
+        compile 'com.localz.spotzpush.sdk:spotz-push-sdk-fcm:2.2.5@aar'
         ...
     }
 
@@ -146,7 +146,7 @@ Dependencies specific for Socket IO
         compile('io.socket:socket.io-client:1.0.0') {
             exclude group: 'org.json', module: 'json'
         }
-        compile 'com.localz.spotzpush.sdk:spotz-push-sdk-socket:2.2.1@aar'
+        compile 'com.localz.spotzpush.sdk:spotz-push-sdk-socket:2.2.5@aar'
         ...
     }
 
@@ -155,7 +155,7 @@ Dependencies specific for Pusher
     dependencies {
         ...
         compile 'org.slf4j:slf4j-api:1.7.25'
-        compile 'com.localz.spotzpush.sdk:spotz-push-sdk-pusher:2.2.1@aar'
+        compile 'com.localz.spotzpush.sdk:spotz-push-sdk-pusher:2.2.5@aar'
         ...
     }
 
@@ -163,7 +163,7 @@ Dependencies specific for Pushy
 
     dependencies {
         ...
-        compile 'com.localz.spotzpush.sdk:spotz-push-sdk-pushy:2.2.1@aar'
+        compile 'com.localz.spotzpush.sdk:spotz-push-sdk-pushy:2.2.5@aar'
         ...
     }
 

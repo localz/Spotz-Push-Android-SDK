@@ -76,7 +76,7 @@ android {
     ext {
         supportLibVersion = "27.1.1"
         playServicesVersion = "11.8.0"
-        spotzPushSdkVersion = "2.2.4"
+        spotzPushSdkVersion = "2.2.5"
     }
 
     dependencies {
@@ -86,7 +86,7 @@ android {
         api "com.android.support:appcompat-v7:$supportLibVersion"
 
         //Spotz Push SDK dependencies start
-        api 'com.google.code.gson:gson:2.8.2'
+        api 'com.google.code.gson:gson:2.8.5'
         api('com.google.http-client:google-http-client:1.23.0') {
             exclude module: 'httpclient'
         }
