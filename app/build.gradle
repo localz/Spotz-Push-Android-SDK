@@ -1,11 +1,10 @@
 apply plugin: 'com.android.application'
-
 android {
     compileSdkVersion 27
 
     defaultConfig {
         applicationId "com.sample.spotzpush"
-        minSdkVersion 16
+        minSdkVersion 19
         targetSdkVersion 27
         versionCode 19
         versionName "2.2.3"
@@ -76,7 +75,7 @@ android {
     ext {
         supportLibVersion = "27.1.1"
         playServicesVersion = "11.8.0"
-        spotzPushSdkVersion = "2.2.5"
+        spotzPushSdkVersion = "3.0.0"
     }
 
     dependencies {
@@ -100,24 +99,34 @@ android {
         //Only required for FCM
         fcmApi "com.google.firebase:firebase-messaging:$playServicesVersion"
         fcmApi "com.google.android.gms:play-services-location:$playServicesVersion"
-        fcmApi "com.localz.spotzpush.sdk:spotz-push-sdk-fcm:$spotzPushSdkVersion@aar"
+        fcmApi "com.github.localz:spotz-push-sdk-android-libs:$spotzPushSdkVersion"
+
+        implementation 'com.squareup.okhttp3:logging-interceptor:3.10.0'
+        implementation 'com.squareup.okhttp3:okhttp:3.10.0'
 
         //Only required for pushy
-        pushyApi "com.localz.spotzpush.sdk:spotz-push-sdk-pushy:$spotzPushSdkVersion@aar"
+        pushyApi "com.github.localz:spotz-push-sdk-android-libs:$spotzPushSdkVersion:pushy@aar"
         //Only required for pusher
-        pusherApi "com.localz.spotzpush.sdk:spotz-push-sdk-pusher:$spotzPushSdkVersion@aar"
+        pusherApi "com.github.localz:spotz-push-sdk-android-libs:$spotzPushSdkVersion:pusher@aar"
         pusherApi 'org.slf4j:slf4j-api:1.7.25'
         //Only required for socket.io
-        socketApi "com.localz.spotzpush.sdk:spotz-push-sdk-socket:$spotzPushSdkVersion@aar"
-        socketApi ('io.socket:socket.io-client:1.0.0') {
+        socketApi "com.github.localz:spotz-push-sdk-android-libs:$spotzPushSdkVersion:socket@aar"
+        socketApi('io.socket:socket.io-client:1.0.0') {
             // excluding org.json which is provided by Android
             exclude group: 'org.json', module: 'json'
         }
+
+        implementation 'com.github.localz:base-sdk-android:0.0.9'
+    }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
     }
 }
-
 // Only FCM needs google-services
 if (getGradle().getStartParameter().getTaskRequests()
-        .toString().contains("Fcm") || getGradle().getStartParameter().getTaskRequests()){
+        .toString().contains("Fcm") || getGradle().getStartParameter().getTaskRequests()) {
     apply plugin: 'com.google.gms.google-services'
+}
+dependencies {
 }
