@@ -45,6 +45,10 @@ Note: `GcmIntentService` has been deprecated.
 
 * Upgraded dependencies and documentation. Spotz Push no longer supports GCM.
 
+**2.3.4**
+
+* Upgraded dependencies (now from Jitpack) and enabled Java 8.
+
 What does the sample app do?
 ============================
 
