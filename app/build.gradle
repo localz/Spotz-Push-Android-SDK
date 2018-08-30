@@ -82,42 +82,31 @@ android {
         api fileTree(dir: 'libs', include: ['*.jar'])
 
         //Required for sample app only
-        api "com.android.support:appcompat-v7:$supportLibVersion"
+        implementation "com.android.support:appcompat-v7:$supportLibVersion"
 
-        //Spotz Push SDK dependencies start
-        api 'com.google.code.gson:gson:2.8.5'
-        api('com.google.http-client:google-http-client:1.23.0') {
-            exclude module: 'httpclient'
-        }
-        api('com.google.http-client:google-http-client-gson:1.23.0') {
-            exclude module: 'httpclient'
-        }
-
-        api "com.android.support:support-v4:$supportLibVersion"
-        api "com.google.android.gms:play-services-base:$playServicesVersion"
+        implementation "com.android.support:support-v4:$supportLibVersion"
+        implementation "com.google.android.gms:play-services-base:$playServicesVersion"
 
         //Only required for FCM
-        fcmApi "com.google.firebase:firebase-messaging:$playServicesVersion"
-        fcmApi "com.google.android.gms:play-services-location:$playServicesVersion"
-        fcmApi "com.github.localz:spotz-push-sdk-android-libs:$spotzPushSdkVersion"
-
-        implementation 'com.squareup.okhttp3:logging-interceptor:3.10.0'
-        implementation 'com.squareup.okhttp3:okhttp:3.10.0'
+        fcmImplementation "com.google.firebase:firebase-messaging:$playServicesVersion"
+        fcmImplementation "com.google.android.gms:play-services-location:$playServicesVersion"
+        fcmImplementation "com.github.localz:spotz-push-sdk-android-libs:$spotzPushSdkVersion"
 
         //Only required for pushy
-        pushyApi "com.github.localz:spotz-push-sdk-android-libs:$spotzPushSdkVersion:pushy@aar"
+        pushyImplementation "com.github.localz:spotz-push-sdk-android-libs:$spotzPushSdkVersion:pushy@aar"
+
         //Only required for pusher
-        pusherApi "com.github.localz:spotz-push-sdk-android-libs:$spotzPushSdkVersion:pusher@aar"
-        pusherApi 'org.slf4j:slf4j-api:1.7.25'
+        pusherImplementation "com.github.localz:spotz-push-sdk-android-libs:$spotzPushSdkVersion:pusher@aar"
+        pusherImplementation 'org.slf4j:slf4j-api:1.7.25'
+
         //Only required for socket.io
-        socketApi "com.github.localz:spotz-push-sdk-android-libs:$spotzPushSdkVersion:socket@aar"
-        socketApi('io.socket:socket.io-client:1.0.0') {
+        socketImplementation "com.github.localz:spotz-push-sdk-android-libs:$spotzPushSdkVersion:socket@aar"
+        socketImplementation('io.socket:socket.io-client:1.0.0') {
             // excluding org.json which is provided by Android
             exclude group: 'org.json', module: 'json'
         }
-
-        implementation 'com.github.localz:base-sdk-android:0.0.9'
     }
+
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
@@ -127,6 +116,4 @@ android {
 if (getGradle().getStartParameter().getTaskRequests()
         .toString().contains("Fcm") || getGradle().getStartParameter().getTaskRequests()) {
     apply plugin: 'com.google.gms.google-services'
-}
-dependencies {
 }
