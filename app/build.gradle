@@ -75,7 +75,7 @@ android {
     ext {
         supportLibVersion = "27.1.1"
         playServicesVersion = "11.8.0"
-        spotzPushSdkVersion = "3.0.2"
+        spotzPushSdkVersion = "3.0.3"
     }
 
     dependencies {
