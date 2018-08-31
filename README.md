@@ -6,37 +6,6 @@ Spotz Push is a push notification platform.
 Changelog
 =========
 
-**1.0.0**
-
-* Initial public release.
-
-**2.0.0**
-
-* Incorporated new SDK version to make compatible with Android 6.
-
-**2.0.3**
-
-* Fixed issue with re-initialising SDK when the device is yet to be issued a deviceId.
-
-**2.0.4**
-
-* IntentService to handle notification can now be configured via the AndroidManifest rather than extending DefaultBroadcastReceiver.
-
-**2.1.0**
-
-* Added support for FCM
-
-**2.2.0**
-
-* Added changes to support Android 8 (Oreo).
-* Added custom notification handler (see *"Customise behaviour of SDK"* section below).
-
-Note: `GcmIntentService` has been deprecated.
-
-**2.2.1**
-
-* Added additional push message handler with access to original push message data.
-
 **2.2.2**
 
 * Upgraded Push SDK and updated documentation.
@@ -109,67 +78,50 @@ For FCM variant only, include the following plugin in your app module `build.gra
     apply plugin: 'com.google.gms.google-services'
     ...
 
-Include these common dependencies in the dependencies closure for the app:
+Include these dependencies in the dependencies closure for the app:
 
-    ...
-
+    // Project build.gradle
     allprojects {
         repositories {
-            maven { url "https://localz.github.io/mvn-repo" }
+            jcenter()
+            google()
+            maven {
+                url 'https://jitpack.io'
+                credentials { username authToken }
+            }
+        }
+    }
+
+    // App build.gradle
+    android {
+        ...
+
+        // Ensure Java 8 is enabled
+        compileOptions {
+            sourceCompatibility JavaVersion.VERSION_1_8
+            targetCompatibility JavaVersion.VERSION_1_8
         }
     }
 
     dependencies {
-        compile 'com.android.support:support-v4:27.1.1'
-        compile 'com.google.code.gson:gson:2.8.5'
-        compile('com.google.http-client:google-http-client:1.23.0') {
-            exclude module: 'httpclient'
-        }
-        compile('com.google.http-client:google-http-client-gson:1.23.0') {
-            exclude module: 'httpclient'
-        }
-        compile 'com.google.android.gms:play-services-location:11.8.0'
+        implementation 'com.android.support:support-v4:27.1.1'
+
+        //Only required for FCM
+        fcmImplementation "com.google.firebase:firebase-messaging:$playServicesVersion"
+        fcmImplementation "com.github.localz:spotz-push-sdk-android-libs:3.0.2"
+
+        //Only required for pushy
+        pushyImplementation "com.github.localz:spotz-push-sdk-android-libs:3.0.2:pushy@aar"
+
+        //Only required for pusher
+        pusherImplementation "com.github.localz:spotz-push-sdk-android-libs:3.0.2:pusher@aar"
+
+        //Only required for socket.io
+        socketImplementation "com.github.localz:spotz-push-sdk-android-libs:3.0.2:socket@aar"
+
         ...
     }
     ...
-
-Dependencies specific for FCM
-
-    dependencies {
-        ...
-        compile 'com.google.firebase:firebase-messaging:11.8.0'
-        compile 'com.google.android.gms:play-services-base:11.8.0'
-        compile 'com.localz.spotzpush.sdk:spotz-push-sdk-fcm:2.2.5@aar'
-        ...
-    }
-
-Dependencies specific for Socket IO
-
-    dependencies {
-        ...
-        compile('io.socket:socket.io-client:1.0.0') {
-            exclude group: 'org.json', module: 'json'
-        }
-        compile 'com.localz.spotzpush.sdk:spotz-push-sdk-socket:2.2.5@aar'
-        ...
-    }
-
-Dependencies specific for Pusher
-
-    dependencies {
-        ...
-        compile 'org.slf4j:slf4j-api:1.7.25'
-        compile 'com.localz.spotzpush.sdk:spotz-push-sdk-pusher:2.2.5@aar'
-        ...
-    }
-
-Dependencies specific for Pushy
-
-    dependencies {
-        ...
-        compile 'com.localz.spotzpush.sdk:spotz-push-sdk-pushy:2.2.5@aar'
-        ...
-    }
 
 
 How to use the SDK

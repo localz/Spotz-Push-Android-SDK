@@ -18,8 +18,6 @@ allprojects {
     repositories {
         jcenter()
         google()
-        maven { url "https://localz.github.io/mvn-repo" }
-        maven { url 'http://clojars.org/repo' }
         maven {
             url 'https://jitpack.io'
             credentials { username authToken }

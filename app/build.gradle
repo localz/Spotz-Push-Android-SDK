@@ -75,7 +75,7 @@ android {
     ext {
         supportLibVersion = "27.1.1"
         playServicesVersion = "11.8.0"
-        spotzPushSdkVersion = "3.0.0"
+        spotzPushSdkVersion = "3.0.2"
     }
 
     dependencies {
@@ -83,13 +83,10 @@ android {
 
         //Required for sample app only
         implementation "com.android.support:appcompat-v7:$supportLibVersion"
-
         implementation "com.android.support:support-v4:$supportLibVersion"
-        implementation "com.google.android.gms:play-services-base:$playServicesVersion"
 
         //Only required for FCM
         fcmImplementation "com.google.firebase:firebase-messaging:$playServicesVersion"
-        fcmImplementation "com.google.android.gms:play-services-location:$playServicesVersion"
         fcmImplementation "com.github.localz:spotz-push-sdk-android-libs:$spotzPushSdkVersion"
 
         //Only required for pushy
@@ -97,14 +94,9 @@ android {
 
         //Only required for pusher
         pusherImplementation "com.github.localz:spotz-push-sdk-android-libs:$spotzPushSdkVersion:pusher@aar"
-        pusherImplementation 'org.slf4j:slf4j-api:1.7.25'
 
         //Only required for socket.io
         socketImplementation "com.github.localz:spotz-push-sdk-android-libs:$spotzPushSdkVersion:socket@aar"
-        socketImplementation('io.socket:socket.io-client:1.0.0') {
-            // excluding org.json which is provided by Android
-            exclude group: 'org.json', module: 'json'
-        }
     }
 
     compileOptions {
