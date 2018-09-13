@@ -5,9 +5,9 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.widget.TextView;
 
-import com.localz.spotzpush.sdk.model.response.BaseJsonResponse;
-import com.localz.spotzpush.sdk.model.response.DeviceJsonResponse;
-import com.localz.spotzpush.sdk.service.SpotzPushService;
+import com.localz.spotzpush.sdk.model.response.BaseResponse;
+import com.localz.spotzpush.sdk.model.response.DeviceResponse;
+import com.localz.spotzpush.sdk.service.LocalzPushSDK;
 import com.localz.spotzpush.sdk.task.BaseDeviceRegisterOrUpdateTask;
 import com.localz.spotzpush.sdk.util.Common;
 
@@ -35,10 +35,10 @@ public class MainActivity extends Activity {
         String deviceId = p.getString(Common.PUSH_PREFS_DEVICE_ID, "");
         ((TextView) this.findViewById(R.id.deviceId)).setText(deviceId);
 
-        //Initialise SpotzPushService with three keys: Pusher app key,
+        //Initialise LocalzPushSDK with three keys: Pusher app key,
         //Spotz Push project ID, and the Spotz Push Android client key. They can all be directly
         //provided as a string.
-        SpotzPushService.init(
+        LocalzPushSDK.init(
                 this,
                 BuildConfig.PUSHER_APP_KEY,
                 BuildConfig.PUSHER_CLUSTER,
@@ -47,12 +47,12 @@ public class MainActivity extends Activity {
                 //Optional callback to process tasks after registration is complete, can be null.
                 new BaseDeviceRegisterOrUpdateTask.Callback() {
                     @Override
-                    public void onCompleted(DeviceJsonResponse deviceJsonResponse) {
+                    public void onCompleted(DeviceResponse deviceJsonResponse) {
                         ((TextView) MainActivity.this.findViewById(R.id.deviceId)).setText(deviceJsonResponse.deviceId);
                     }
 
                     @Override
-                    public void onError(BaseJsonResponse e) {
+                    public void onError(BaseResponse e) {
                         ((TextView) MainActivity.this.findViewById(R.id.deviceId)).setText(e.message);
                     }
                 }

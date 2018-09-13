@@ -6,17 +6,12 @@ Spotz Push is a push notification platform.
 Changelog
 =========
 
-**2.2.2**
+**2.3.0**
 
-* Upgraded Push SDK and updated documentation.
-
-**2.2.3**
-
-* Upgraded dependencies and documentation. Spotz Push no longer supports GCM.
-
-**2.2.4**
-
-* Upgraded dependencies (now from Jitpack) and enabled Java 8.
+* Upgraded to Spotz Push SDK 4.0.0
+* SpotzPushService -> LocalzPushSDK
+* BaseJsonResponse -> BaseResponse
+* DeviceJsonResponse -> DeviceResponse
 
 What does the sample app do?
 ============================
@@ -108,16 +103,16 @@ Include these dependencies in the dependencies closure for the app:
 
         //Only required for FCM
         fcmImplementation "com.google.firebase:firebase-messaging:$playServicesVersion"
-        fcmImplementation "com.github.localz:spotz-push-sdk-android-libs:3.0.3"
+        fcmImplementation "com.github.localz:spotz-push-sdk-android-libs:4.0.0"
 
         //Only required for pushy
-        pushyImplementation "com.github.localz:spotz-push-sdk-android-libs:3.0.3:pushy@aar"
+        pushyImplementation "com.github.localz:spotz-push-sdk-android-libs:4.0.0:pushy@aar"
 
         //Only required for pusher
-        pusherImplementation "com.github.localz:spotz-push-sdk-android-libs:3.0.3:pusher@aar"
+        pusherImplementation "com.github.localz:spotz-push-sdk-android-libs:4.0.0:pusher@aar"
 
         //Only required for socket.io
-        socketImplementation "com.github.localz:spotz-push-sdk-android-libs:3.0.3:socket@aar"
+        socketImplementation "com.github.localz:spotz-push-sdk-android-libs:4.0.0:socket@aar"
 
         ...
     }
@@ -237,7 +232,7 @@ For FCM, Socket IO and Pushy variants:
     
     ...
     
-    SpotzPushService.init(android.content.Context, "your-spotz-push-project-id", "your-spotz-push-client-key");
+    LocalzPushSDK.init(android.content.Context, "your-spotz-push-project-id", "your-spotz-push-client-key");
 
     ...
 
@@ -245,15 +240,15 @@ For Pusher variant:
     
     ...
     
-    SpotzPushService.init(android.content.Context, "your-pusher-app-key", "your-pusher-app-cluster", "your-spotz-push-project-id", "your-spotz-push-client-key");
+    LocalzPushSDK.init(android.content.Context, "your-pusher-app-key", "your-pusher-app-cluster", "your-spotz-push-project-id", "your-spotz-push-client-key");
 
     ...
 
-Ensure to check whether the application has Google Play Services available before initialising the SpotzPushService. The sample code includes an example of this in MainActivity.checkPlayServices();
+Ensure to check whether the application has Google Play Services available before initialising the LocalzPushSDK. The sample code includes an example of this in MainActivity.checkPlayServices();
 
 Your project is now ready to start using the Spotz Push SDK!
 
-When the SpotzPushService is initialised, the app will automatically grab a device token from Firebase Cloud Messaging, and register this with Spotz Push asynchronously in the background. Once this is done, a device ID will be issued to be used for pushing notifications to.
+When the LocalzPushSDK is initialised, the app will automatically grab a device token from Firebase Cloud Messaging, and register this with Spotz Push asynchronously in the background. Once this is done, a device ID will be issued to be used for pushing notifications to.
 
 Customise behaviour of SDK
 ============

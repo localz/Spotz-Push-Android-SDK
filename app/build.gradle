@@ -7,7 +7,7 @@ android {
         minSdkVersion 19
         targetSdkVersion 27
         versionCode 19
-        versionName "2.2.4"
+        versionName "2.3.0"
 
         buildConfigField 'String', 'SPOTZ_PUSH_PROJECT_ID', '"Insert Spotz Push Project ID here"'
         buildConfigField 'String', 'SPOTZ_PUSH_PROJECT_KEY', '"Insert Spotz Push Android Client key here"'
@@ -75,7 +75,7 @@ android {
     ext {
         supportLibVersion = "27.1.1"
         playServicesVersion = "11.8.0"
-        spotzPushSdkVersion = "3.0.3"
+        spotzPushSdkVersion = "4.0.0"
     }
 
     dependencies {
@@ -86,6 +86,7 @@ android {
         implementation "com.android.support:support-v4:$supportLibVersion"
 
         //Only required for FCM
+        fcmImplementation "com.google.android.gms:play-services-location:$playServicesVersion"
         fcmImplementation "com.google.firebase:firebase-messaging:$playServicesVersion"
         fcmImplementation "com.github.localz:spotz-push-sdk-android-libs:$spotzPushSdkVersion"
 
