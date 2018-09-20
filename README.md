@@ -3,16 +3,6 @@ Spotz Push Android SDK
 
 Spotz Push is a push notification platform.
 
-Changelog
-=========
-
-**2.3.0**
-
-* Upgraded to Spotz Push SDK 4.0.0
-* SpotzPushService -> LocalzPushSDK
-* BaseJsonResponse -> BaseResponse
-* DeviceJsonResponse -> DeviceResponse
-
 What does the sample app do?
 ============================
 
