@@ -93,16 +93,16 @@ Include these dependencies in the dependencies closure for the app:
 
         //Only required for FCM
         fcmImplementation "com.google.firebase:firebase-messaging:$playServicesVersion"
-        fcmImplementation "com.github.localz:spotz-push-sdk-android-libs:4.0.0"
+        fcmImplementation "com.localz:spotz-push-sdk-android-libs:4.0.0"
 
         //Only required for pushy
-        pushyImplementation "com.github.localz:spotz-push-sdk-android-libs:4.0.0:pushy@aar"
+        pushyImplementation "com.localz:spotz-push-sdk-android-libs:4.0.0:pushy@aar"
 
         //Only required for pusher
-        pusherImplementation "com.github.localz:spotz-push-sdk-android-libs:4.0.0:pusher@aar"
+        pusherImplementation "com.localz:spotz-push-sdk-android-libs:4.0.0:pusher@aar"
 
         //Only required for socket.io
-        socketImplementation "com.github.localz:spotz-push-sdk-android-libs:4.0.0:socket@aar"
+        socketImplementation "com.localz:spotz-push-sdk-android-libs:4.0.0:socket@aar"
 
         ...
     }
