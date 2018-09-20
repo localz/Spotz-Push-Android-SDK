@@ -7,7 +7,7 @@ android {
         minSdkVersion 19
         targetSdkVersion 27
         versionCode 19
-        versionName "2.3.0"
+        versionName "3.0.0"
 
         buildConfigField 'String', 'SPOTZ_PUSH_PROJECT_ID', '"Insert Spotz Push Project ID here"'
         buildConfigField 'String', 'SPOTZ_PUSH_PROJECT_KEY', '"Insert Spotz Push Android Client key here"'
@@ -75,11 +75,11 @@ android {
     ext {
         supportLibVersion = "27.1.1"
         playServicesVersion = "11.8.0"
-        spotzPushSdkVersion = "4.0.0"
+        spotzPushSdkVersion = "4.1.0"
     }
 
     dependencies {
-        api fileTree(dir: 'libs', include: ['*.jar'])
+        implementation fileTree(dir: 'libs', include: ['*.jar'])
 
         //Required for sample app only
         implementation "com.android.support:appcompat-v7:$supportLibVersion"
@@ -88,16 +88,16 @@ android {
         //Only required for FCM
         fcmImplementation "com.google.android.gms:play-services-location:$playServicesVersion"
         fcmImplementation "com.google.firebase:firebase-messaging:$playServicesVersion"
-        fcmImplementation "com.github.localz:spotz-push-sdk-android-libs:$spotzPushSdkVersion"
+        fcmImplementation "com.localz:spotz-push-sdk-android-libs:$spotzPushSdkVersion"
 
         //Only required for pushy
-        pushyImplementation "com.github.localz:spotz-push-sdk-android-libs:$spotzPushSdkVersion:pushy@aar"
+        pushyImplementation "com.localz:spotz-push-sdk-android-libs:$spotzPushSdkVersion:pushy@aar"
 
         //Only required for pusher
-        pusherImplementation "com.github.localz:spotz-push-sdk-android-libs:$spotzPushSdkVersion:pusher@aar"
+        pusherImplementation "com.localz:spotz-push-sdk-android-libs:$spotzPushSdkVersion:pusher@aar"
 
         //Only required for socket.io
-        socketImplementation "com.github.localz:spotz-push-sdk-android-libs:$spotzPushSdkVersion:socket@aar"
+        socketImplementation "com.localz:spotz-push-sdk-android-libs:$spotzPushSdkVersion:socket@aar"
     }
 
     compileOptions {
