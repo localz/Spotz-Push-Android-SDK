@@ -1,4 +1,5 @@
 apply plugin: 'com.android.application'
+
 android {
     compileSdkVersion 27
 
@@ -9,15 +10,17 @@ android {
         versionCode 19
         versionName "3.0.0"
 
-        buildConfigField 'String', 'SPOTZ_PUSH_PROJECT_ID', '"Insert Spotz Push Project ID here"'
-        buildConfigField 'String', 'SPOTZ_PUSH_PROJECT_KEY', '"Insert Spotz Push Android Client key here"'
+        buildConfigField 'String', 'SPOTZ_PUSH_PROJECT_ID', '"<YOUR_SPOTZ_PUSH_PROJECT_ID>"'
+        buildConfigField 'String', 'SPOTZ_PUSH_PROJECT_KEY', '"<YOUR_SPOTZ_PUSH_PROJECT_KEY"'
     }
+
     buildTypes {
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
+
     flavorDimensions "default"
 
     productFlavors {
@@ -40,8 +43,8 @@ android {
             dimension "default"
             applicationId 'com.sample.spotzpush.pusher'
             versionName + '-pusher'
-            buildConfigField 'String', 'PUSHER_APP_KEY', '"<Insert Pusher App Key here>"'
-            buildConfigField 'String', 'PUSHER_CLUSTER', '"<Insert Pusher Cluster here>"'
+            buildConfigField 'String', 'PUSHER_APP_KEY', '"<YOUR_PUSHER_APP_KEY>"'
+            buildConfigField 'String', 'PUSHER_CLUSTER', '"<YOUR_PUSHER_CLUSTER>"'
         }
     }
 
@@ -72,39 +75,37 @@ android {
         }
     }
 
-    ext {
-        supportLibVersion = "27.1.1"
-        playServicesVersion = "11.8.0"
-        spotzPushSdkVersion = "4.1.0"
-    }
-
-    dependencies {
-        implementation fileTree(dir: 'libs', include: ['*.jar'])
-
-        //Required for sample app only
-        implementation "com.android.support:appcompat-v7:$supportLibVersion"
-        implementation "com.android.support:support-v4:$supportLibVersion"
-
-        //Only required for FCM
-        fcmImplementation "com.google.android.gms:play-services-location:$playServicesVersion"
-        fcmImplementation "com.google.firebase:firebase-messaging:$playServicesVersion"
-        fcmImplementation "com.localz:spotz-push-sdk-android-libs:$spotzPushSdkVersion"
-
-        //Only required for pushy
-        pushyImplementation "com.localz:spotz-push-sdk-android-libs:$spotzPushSdkVersion:pushy@aar"
-
-        //Only required for pusher
-        pusherImplementation "com.localz:spotz-push-sdk-android-libs:$spotzPushSdkVersion:pusher@aar"
-
-        //Only required for socket.io
-        socketImplementation "com.localz:spotz-push-sdk-android-libs:$spotzPushSdkVersion:socket@aar"
-    }
-
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
     }
 }
+
+dependencies {
+    ext {
+        supportLibVersion = "27.1.1"
+        spotzPushSdkVersion = "1.7.3"
+    }
+
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+
+    //Required for sample app only
+    implementation "com.android.support:appcompat-v7:$supportLibVersion"
+    implementation "com.android.support:support-v4:$supportLibVersion"
+
+    //Only required for FCM
+    fcmImplementation "com.localz.localz-sdk-android:spotz-push-fcm:$spotzPushSdkVersion"
+
+    //Only required for pushy
+    pushyImplementation "com.localz.localz-sdk-android:spotz-push-pushy:$spotzPushSdkVersion"
+
+    //Only required for pusher
+    pusherImplementation "com.localz.localz-sdk-android:spotz-push-pusher:$spotzPushSdkVersion"
+
+    //Only required for socket.io
+    socketImplementation "com.localz.localz-sdk-android:spotz-push-socket:$spotzPushSdkVersion"
+}
+
 // Only FCM needs google-services
 if (getGradle().getStartParameter().getTaskRequests()
         .toString().contains("Fcm") || getGradle().getStartParameter().getTaskRequests()) {

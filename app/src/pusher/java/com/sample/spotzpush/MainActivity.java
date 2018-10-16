@@ -5,9 +5,10 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.widget.TextView;
 
+import com.localz.sdk.util.LocalzEnvironment;
 import com.localz.spotzpush.sdk.model.response.BaseResponse;
 import com.localz.spotzpush.sdk.model.response.DeviceResponse;
-import com.localz.spotzpush.sdk.service.LocalzPushSDK;
+import com.localz.spotzpush.sdk.pusher.service.LocalzPushSDK;
 import com.localz.spotzpush.sdk.task.BaseDeviceRegisterOrUpdateTask;
 import com.localz.spotzpush.sdk.util.Common;
 
@@ -44,6 +45,8 @@ public class MainActivity extends Activity {
                 BuildConfig.PUSHER_CLUSTER,
                 BuildConfig.SPOTZ_PUSH_PROJECT_ID,
                 BuildConfig.SPOTZ_PUSH_PROJECT_KEY,
+                "",
+                LocalzEnvironment.DEV,
                 //Optional callback to process tasks after registration is complete, can be null.
                 new BaseDeviceRegisterOrUpdateTask.Callback() {
                     @Override

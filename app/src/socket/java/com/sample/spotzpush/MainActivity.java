@@ -11,9 +11,10 @@ import android.os.PowerManager;
 import android.provider.Settings;
 import android.widget.TextView;
 
+import com.localz.sdk.core.util.LocalzEnvironment;
 import com.localz.spotzpush.sdk.model.response.BaseResponse;
 import com.localz.spotzpush.sdk.model.response.DeviceResponse;
-import com.localz.spotzpush.sdk.service.LocalzPushSDK;
+import com.localz.spotzpush.sdk.socket.service.LocalzPushSDK;
 import com.localz.spotzpush.sdk.task.BaseDeviceRegisterOrUpdateTask;
 import com.localz.spotzpush.sdk.util.Common;
 
@@ -21,7 +22,6 @@ import com.localz.spotzpush.sdk.util.Common;
  * Sample activity which includes the initialisation methods required to start using Spotz Push
  */
 public class MainActivity extends Activity {
-
     public static final int  PERMISSION_REQUEST_ACCESS_FINE_LOCATION = 9010;
     public static final int PLAY_SERVICES_RESOLUTION_REQUEST = 9000;
 
@@ -48,6 +48,8 @@ public class MainActivity extends Activity {
                 this,
                 BuildConfig.SPOTZ_PUSH_PROJECT_ID,
                 BuildConfig.SPOTZ_PUSH_PROJECT_KEY,
+                deviceId,
+                LocalzEnvironment.DEV,
                 //Optional callback to process tasks after registration is complete, can be null.
                 new BaseDeviceRegisterOrUpdateTask.Callback() {
                     @Override
