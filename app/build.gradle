@@ -105,9 +105,3 @@ dependencies {
     //Only required for socket.io
     socketImplementation "com.localz.localz-sdk-android:spotz-push-socket:$localzSdkVersion"
 }
-
-// Only FCM needs google-services
-if (getGradle().getStartParameter().getTaskRequests()
-        .toString().contains("Fcm") || getGradle().getStartParameter().getTaskRequests()) {
-    apply plugin: 'com.google.gms.google-services'
-}
