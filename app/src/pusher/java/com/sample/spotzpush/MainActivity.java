@@ -45,8 +45,6 @@ public class MainActivity extends Activity {
                 BuildConfig.PUSHER_CLUSTER,
                 BuildConfig.SPOTZ_PUSH_PROJECT_ID,
                 BuildConfig.SPOTZ_PUSH_PROJECT_KEY,
-                "",
-                LocalzEnvironment.DEV,
                 //Optional callback to process tasks after registration is complete, can be null.
                 new BaseDeviceRegisterOrUpdateTask.Callback() {
                     @Override
