@@ -84,7 +84,7 @@ android {
 dependencies {
     ext {
         supportLibVersion = "27.1.1"
-        spotzPushSdkVersion = "1.7.3"
+        localzSdkVersion = "1.7.3"
     }
 
     implementation fileTree(dir: 'libs', include: ['*.jar'])
@@ -94,16 +94,16 @@ dependencies {
     implementation "com.android.support:support-v4:$supportLibVersion"
 
     //Only required for FCM
-    fcmImplementation "com.localz.localz-sdk-android:spotz-push-fcm:$spotzPushSdkVersion"
+    fcmImplementation "com.localz.localz-sdk-android:spotz-push-fcm:$localzSdkVersion"
 
     //Only required for pushy
-    pushyImplementation "com.localz.localz-sdk-android:spotz-push-pushy:$spotzPushSdkVersion"
+    pushyImplementation "com.localz.localz-sdk-android:spotz-push-pushy:$localzSdkVersion"
 
     //Only required for pusher
-    pusherImplementation "com.localz.localz-sdk-android:spotz-push-pusher:$spotzPushSdkVersion"
+    pusherImplementation "com.localz.localz-sdk-android:spotz-push-pusher:$localzSdkVersion"
 
     //Only required for socket.io
-    socketImplementation "com.localz.localz-sdk-android:spotz-push-socket:$spotzPushSdkVersion"
+    socketImplementation "com.localz.localz-sdk-android:spotz-push-socket:$localzSdkVersion"
 }
 
 // Only FCM needs google-services
