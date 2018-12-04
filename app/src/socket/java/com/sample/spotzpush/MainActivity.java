@@ -11,7 +11,6 @@ import android.os.PowerManager;
 import android.provider.Settings;
 import android.widget.TextView;
 
-import com.localz.sdk.core.util.LocalzEnvironment;
 import com.localz.spotzpush.sdk.model.response.BaseResponse;
 import com.localz.spotzpush.sdk.model.response.DeviceResponse;
 import com.localz.spotzpush.sdk.socket.service.LocalzPushSDK;

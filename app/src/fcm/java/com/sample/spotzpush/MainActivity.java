@@ -18,10 +18,9 @@ import android.widget.TextView;
 
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.GoogleApiAvailability;
-import com.localz.sdk.core.util.LocalzEnvironment;
+import com.localz.spotzpush.sdk.fcm.service.LocalzPushSDK;
 import com.localz.spotzpush.sdk.model.response.BaseResponse;
 import com.localz.spotzpush.sdk.model.response.DeviceResponse;
-import com.localz.spotzpush.sdk.fcm.service.LocalzPushSDK;
 import com.localz.spotzpush.sdk.task.BaseDeviceRegisterOrUpdateTask;
 import com.localz.spotzpush.sdk.util.Common;
 
