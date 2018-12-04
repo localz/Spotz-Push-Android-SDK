@@ -51,7 +51,8 @@ For FCM variant only, include the following plugin in your project `build.gradle
     ...
     buildscript {
         dependencies {
-            classpath 'com.google.gms:google-services:3.2.1'
+            ...
+            classpath 'com.google.gms:google-services:4.1.0'
         }
     }
     ...
@@ -68,11 +69,10 @@ Include these dependencies in the dependencies closure for the app:
     // Project build.gradle
     allprojects {
         repositories {
-            jcenter()
             google()
+            jcenter()
             maven {
                 url 'https://jitpack.io'
-                credentials { username authToken }
             }
         }
     }
@@ -89,20 +89,21 @@ Include these dependencies in the dependencies closure for the app:
     }
 
     dependencies {
-        implementation 'com.android.support:support-v4:27.1.1'
-
+        //Required for sample app only
+        implementation "com.android.support:appcompat-v7:27.1.1"
+        implementation "com.android.support:support-v4:27.1.1"
+    
         //Only required for FCM
-        fcmImplementation "com.google.firebase:firebase-messaging:$playServicesVersion"
-        fcmImplementation "com.localz:spotz-push-sdk-android-libs:4.1.0"
-
+        fcmImplementation "com.localz.localz-sdk-android:spotz-push-fcm:$localzSdkVersion"
+    
         //Only required for pushy
-        pushyImplementation "com.localz:spotz-push-sdk-android-libs:4.1.0:pushy@aar"
-
+        pushyImplementation "com.localz.localz-sdk-android:spotz-push-pushy:$localzSdkVersion"
+    
         //Only required for pusher
-        pusherImplementation "com.localz:spotz-push-sdk-android-libs:4.1.0:pusher@aar"
-
+        pusherImplementation "com.localz.localz-sdk-android:spotz-push-pusher:$localzSdkVersion"
+    
         //Only required for socket.io
-        socketImplementation "com.localz:spotz-push-sdk-android-libs:4.1.0:socket@aar"
+        socketImplementation "com.localz.localz-sdk-android:spotz-push-socket:$localzSdkVersion"
 
         ...
     }
@@ -124,28 +125,16 @@ For FCM (if your project is not using automatic manifest merging)
 
     ...
     <manifest>
-        <uses-permission android:name="com.google.android.c2dm.permission.RECEIVE" />
-            
+        <uses-permission android:name="android.permission.INTERNET" />
+        <uses-permission android:name="android.permission.WAKE_LOCK" />
+        <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+        
         <application>
-            <service
-                android:name="com.google.firebase.messaging.FirebaseMessagingService"
-                android:exported="true" >
-                <intent-filter android:priority="-500" >
-                    <action android:name="com.google.firebase.MESSAGING_EVENT" />
-                </intent-filter>
-            </service>
-            <service
-                android:name="com.localz.spotzpush.sdk.service.FirebaseService"
-                android:exported="false" >
+             <service
+                android:name="com.localz.spotzpush.sdk.fcm.service.FirebaseService"
+                android:exported="false">
                 <intent-filter>
                     <action android:name="com.google.firebase.MESSAGING_EVENT" />
-                </intent-filter>
-            </service>
-            <service
-                android:name="com.localz.spotzpush.sdk.service.InstanceIdService"
-                android:exported="false" >
-                <intent-filter>
-                    <action android:name="com.google.firebase.INSTANCE_ID_EVENT" />
                 </intent-filter>
             </service>
         </application>
