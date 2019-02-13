@@ -1,14 +1,14 @@
 apply plugin: 'com.android.application'
 
 android {
-    compileSdkVersion 27
+    compileSdkVersion 28
 
     defaultConfig {
         applicationId "com.sample.spotzpush"
         minSdkVersion 19
-        targetSdkVersion 27
-        versionCode 19
-        versionName "3.0.0"
+        targetSdkVersion 28
+        versionCode 20
+        versionName "3.0.1"
 
         buildConfigField 'String', 'SPOTZ_PUSH_PROJECT_ID', '"<YOUR_SPOTZ_PUSH_PROJECT_ID>"'
         buildConfigField 'String', 'SPOTZ_PUSH_PROJECT_KEY', '"<YOUR_SPOTZ_PUSH_PROJECT_KEY"'
@@ -83,8 +83,8 @@ android {
 
 dependencies {
     ext {
-        supportLibVersion = "27.1.1"
-        localzSdkVersion = "1.7.4"
+        supportLibVersion = "28.0.0"
+        localzSdkVersion = "2.4.11"
     }
 
     implementation fileTree(dir: 'libs', include: ['*.jar'])
