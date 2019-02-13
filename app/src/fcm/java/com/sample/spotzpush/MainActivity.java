@@ -24,6 +24,8 @@ import com.localz.spotzpush.sdk.model.response.DeviceResponse;
 import com.localz.spotzpush.sdk.task.BaseDeviceRegisterOrUpdateTask;
 import com.localz.spotzpush.sdk.util.Common;
 
+import org.jetbrains.annotations.NotNull;
+
 /**
  * Sample activity which includes the initialisation methods required to start using Spotz Push
  */
@@ -62,12 +64,12 @@ public class MainActivity extends Activity {
                     //Optional callback to process tasks after registration is complete, can be null.
                     new BaseDeviceRegisterOrUpdateTask.Callback() {
                         @Override
-                        public void onCompleted(DeviceResponse deviceJsonResponse) {
+                        public void onCompleted(@NotNull DeviceResponse deviceJsonResponse) {
                             ((TextView) MainActivity.this.findViewById(R.id.deviceId)).setText(deviceJsonResponse.deviceId);
                         }
 
                         @Override
-                        public void onError(BaseResponse e) {
+                        public void onError(@NotNull BaseResponse e) {
                             ((TextView) MainActivity.this.findViewById(R.id.deviceId)).setText(e.message);
                         }
                     }
@@ -94,7 +96,7 @@ public class MainActivity extends Activity {
 
     @Override
     public void onRequestPermissionsResult(int requestCode,
-                                           String permissions[], int[] grantResults) {
+                                           @NotNull String permissions[], @NotNull int[] grantResults) {
         switch (requestCode) {
             case PERMISSION_REQUEST_ACCESS_FINE_LOCATION: {
                 // If request is cancelled, the result arrays are empty.
