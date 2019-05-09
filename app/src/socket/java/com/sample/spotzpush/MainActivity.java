@@ -21,7 +21,7 @@ import com.localz.spotzpush.sdk.util.Common;
  * Sample activity which includes the initialisation methods required to start using Spotz Push
  */
 public class MainActivity extends Activity {
-    public static final int  PERMISSION_REQUEST_ACCESS_FINE_LOCATION = 9010;
+    public static final int PERMISSION_REQUEST_ACCESS_FINE_LOCATION = 9010;
     public static final int PLAY_SERVICES_RESOLUTION_REQUEST = 9000;
 
     private static final String TAG = MainActivity.class.getSimpleName();

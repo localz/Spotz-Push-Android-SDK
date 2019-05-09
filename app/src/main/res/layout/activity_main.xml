@@ -14,8 +14,7 @@
         android:layout_gravity="center"
         android:gravity="center"
         android:padding="@dimen/default_padding"
-        android:text="@string/main_text"
-        />
+        android:text="@string/main_text" />
 
     <TextView
         android:id="@+id/deviceId"
@@ -23,7 +22,6 @@
         android:layout_height="wrap_content"
         android:textSize="@dimen/text_medium"
         android:textStyle="bold"
-        android:padding="@dimen/default_padding"
-        />
+        android:padding="@dimen/default_padding" />
 
 </LinearLayout>

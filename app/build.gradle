@@ -1,4 +1,5 @@
 apply plugin: 'com.android.application'
+apply plugin: 'kotlin-android'
 
 android {
     compileSdkVersion 28
@@ -84,7 +85,7 @@ android {
 dependencies {
     ext {
         supportLibVersion = "28.0.0"
-        localzSdkVersion = "2.8.1-alpha03"
+        localzSdkVersion = "2.8.1-alpha07"
     }
 
     implementation fileTree(dir: 'libs', include: ['*.jar'])
@@ -92,6 +93,7 @@ dependencies {
     //Required for sample app only
     implementation "com.android.support:appcompat-v7:$supportLibVersion"
     implementation "com.android.support:support-v4:$supportLibVersion"
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk8:$kotlin_version"
 
     //Only required for FCM
     fcmImplementation "com.localz.localz-sdk-android:spotz-push-fcm:$localzSdkVersion"
