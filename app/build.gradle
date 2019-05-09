@@ -84,7 +84,7 @@ android {
 dependencies {
     ext {
         supportLibVersion = "28.0.0"
-        localzSdkVersion = "2.4.11"
+        localzSdkVersion = "2.8.1-alpha03"
     }
 
     implementation fileTree(dir: 'libs', include: ['*.jar'])
